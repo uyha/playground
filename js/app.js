@@ -1,6 +1,9 @@
-function function_call(identifier, ...arguments){
-  console.log(identifier);
-  console.log(...arguments);
+function commandName(name) {
+  return { [name]: new RegExp(name) };
 }
 
-function_call("foreach", "fasd", "asdf")
+function commands(...names) {
+  return Object.assign({}, ...names.map(commandName));
+}
+
+console.log(commands("asdf", "foreach"));
