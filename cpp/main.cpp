@@ -1,11 +1,10 @@
 #include <iostream>
 
-int test(){
-  return 1;
-}
+int test() { return 1; }
 
-int main()
-{
+int main() {
   test();
   std::cout << "Hello, World" << std::endl;
+  while (true)
+    ;
 }
