@@ -1,1 +1,2 @@
-message(STATUS test)
+foreach(var IN)
+endforeach()
