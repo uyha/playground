@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/home/uy/sandbox/socketcan/build",
+  "command": "/usr/bin/c++   -std=gnu++2a -o CMakeFiles/socketcan.dir/main.cpp.o -c /home/uy/sandbox/socketcan/main.cpp",
+  "file": "/home/uy/sandbox/socketcan/main.cpp"
+}
+]
