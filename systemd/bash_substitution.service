@@ -1,0 +1,9 @@
+[Unit]
+Description=Bash script command substitution
+
+[Service]
+Type=simple
+ExecStart= bash echo $(cat /etc/apt/sources.list)
+
+[Install]
+WantedBy=multi-user.target
