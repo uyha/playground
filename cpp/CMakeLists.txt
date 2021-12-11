@@ -8,7 +8,6 @@ endmacro()
 
 add_snippet(compiler_macro)
 add_snippet(sml)
-add_snippet(template_template)
 add_snippet(member_variable_capture_by_ref)
 add_snippet(anonymous_struct)
 add_snippet(chrono_duration)
