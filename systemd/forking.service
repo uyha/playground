@@ -1,0 +1,10 @@
+[Unit]
+Description=Trying forking process
+
+[Service]
+Type=forking
+ExecStart=
+Restart=
+
+[Install]
+WantedBy=multi-user.target

@@ -12,3 +12,6 @@ add_snippet(member_variable_capture_by_ref)
 add_snippet(anonymous_struct)
 add_snippet(chrono_duration)
 add_snippet(unix_domain_socket)
+add_snippet(nttp)
+
+add_subdirectory(dynamic_library)
