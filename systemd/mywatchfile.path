@@ -1,0 +1,5 @@
+[Path]
+PathChanged=/home/uy/sandbox/systemd/conf
+
+[Install]
+WantedBy=multi-user.target

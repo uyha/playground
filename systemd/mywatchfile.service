@@ -2,8 +2,8 @@
 Description=Bash script command substitution
 
 [Service]
-Type=simple
-ExecStart= bash echo $(cat /etc/apt/sources.list)
+Type=oneshot
+ExecStart=/home/uy/sandbox/systemd/script
 
 [Install]
 WantedBy=multi-user.target
