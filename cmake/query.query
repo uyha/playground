@@ -1,0 +1,12 @@
+(normal_command
+  (identifier) @function.builtin
+  (#match? @function.builtin "^(set)$")
+  . (argument)
+  (
+    (argument) @m_cache @constant
+    .
+    (argument) @m_type @constant
+    (#match? @m_cache "CACHE")
+    (#match? @m_type "STRING")
+  )
+)

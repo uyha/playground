@@ -1,5 +1,7 @@
-cmake_minimum_required(VERSION 3.22)
+cmake_minimum_required("VERSION" 3.22)
 project(deb_generator)
+
+configure_file(NEWLINE_STYLE UNIX)
 
 set(CPACK_DEBIAN_PACKAGE_DEBUG ON)
 set(CPACK_GENERATOR DEB)
@@ -17,3 +19,7 @@ install(
 
 cpack_add_component(comp)
 
+if(NOT a)
+elseif(NOT a)
+endif()
+file(DOWNLOAD)

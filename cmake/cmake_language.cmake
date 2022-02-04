@@ -1,0 +1,7 @@
+cmake_language(CALL message "STATUS;hello")
+cmake_language(CALL message "STATUS hello")
+cmake_language(CALL message "STATUS" "hello")
+cmake_language(CALL message STATUS hello)
+cmake_language(CALL message STATUS;hello)
+cmake_language(CALL message "STATUS";"hello")
+cmake_language(CALL message "STATUS";hello)

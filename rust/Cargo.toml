@@ -11,3 +11,7 @@ indicatif = "0.16"
 mime = "0.3"
 http = "0.2"
 rusqlite = { version = "0.26", features = ["bundled"] }
+tar = "0.4"
+flate2 = "1"
+bzip2 = "0.4"
+xz2 = "0.1"

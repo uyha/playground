@@ -1,0 +1,5 @@
+(normal_command
+  (identifier) @function.builtin
+  . (argument) @constant
+  (argument) @variable .
+)
