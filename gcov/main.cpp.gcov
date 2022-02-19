@@ -1,0 +1,9 @@
+        -:    0:Source:/home/uy/sandbox/gcov/main.cpp
+    #####:    1:void dummy() {}
+        4:    2:int main() {
+        -:    3:  if (true) {
+        4:    4:    return 1;
+        -:    5:  } else {
+        -:    6:    return 0;
+        -:    7:  }
+        -:    8:}

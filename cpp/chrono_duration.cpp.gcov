@@ -1,0 +1,24 @@
+        -:    0:Source:chrono_duration.cpp
+        -:    0:Graph:chrono_duration.gcno
+        -:    0:Data:chrono_duration.gcda
+        -:    0:Runs:1
+        -:    1:#include<chrono>
+        -:    2:
+        -:    3:struct Duration{
+        -:    4:  std::chrono::steady_clock::duration duration;
+        -:    5:};
+        -:    6:
+        -:    7:/* template<Duration duration> */
+        -:    8:/* bool test(){ */
+        -:    9:/*   using namespace std::chrono_literals; */
+        -:   10:
+        -:   11:/*   return duration.duration > 2s; */
+        -:   12:/* } */
+        -:   13:
+        1:   14:int main(){
+        -:   15:  using namespace std::chrono_literals;
+        -:   16:
+        1:   17:  constexpr auto duration = Duration{.duration = 20s};
+        -:   18:  /* test<duration>(); */
+        -:   19:
+        1:   20:}
