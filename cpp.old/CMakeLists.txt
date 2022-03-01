@@ -15,7 +15,6 @@ add_snippet(chrono_duration)
 add_snippet(unix_domain_socket)
 add_snippet(nttp)
 add_snippet(union)
-add_snippet(enum_template_friend)
 add_snippet(macro)
 
 add_subdirectory(dynamic_library)
