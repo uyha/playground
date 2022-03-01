@@ -13,3 +13,6 @@ endfunction()
 
 add_snippet(conditional_variable)
 target_link_libraries(conditional_variable PRIVATE Threads::Threads)
+
+add_snippet(epoll)
+target_link_libraries(epoll PRIVATE rt)
