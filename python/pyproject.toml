@@ -10,8 +10,7 @@ authors = ["Your Name <you@example.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
-scipy = "*"
-ipython = "*"
+jinja2 = "*"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
