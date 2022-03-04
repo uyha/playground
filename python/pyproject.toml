@@ -1,6 +1,6 @@
 [tool.pyright]
-reportMissingImport = true
-venv = "python-2E3CtRBW-py3.9"
+venvPath = "/home/uy/.cache/pypoetry/virtualenvs/"
+venv = "python-FI1wZDET-py3.10"
 
 [tool.poetry]
 name = "python"
