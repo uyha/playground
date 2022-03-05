@@ -1,0 +1,23 @@
+#include <kwz/control/messages.hpp>
+
+namespace kwz {
+void Messages::switch_language(Language language) noexcept {
+  lang = language;
+
+  switch(lang) {
+  [% for messages in localized_messages %]
+  case Language::[[ messages.name ]]:
+    [% for name, content in messages.static_messages %]
+    [[ name ]] = {[[content | map('quote') | join(', ')]]};
+    [% endfor %]
+
+    [% set active_status = messages.dynamic_messages.active_status %]
+    [% set inactive_status = messages.dynamic_messages.inactive_status %]
+    [% set load = messages.dynamic_messages.load %]
+    active_status = "[[ active_status ]]:{}%";
+    inactive_status = "[[ inactive_status ]]:{}%";
+    load = "[[ load ]]: {}kg";
+  [% endfor %]
+  }
+}
+}
