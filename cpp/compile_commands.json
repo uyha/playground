@@ -1,7 +1,1 @@
-[
-{
-  "directory": "/home/uy/sandbox/cpp/build",
-  "command": "/usr/bin/c++ -isystem /home/uy/.conan/data/fmt/8.1.1/_/_/package/db123017807f5c094e7ffe64463018510e127133/include -O3 -DNDEBUG -Wall -Wextra -Wshadow -Wnon-virtual-dtor -pedantic -Wno-psabi -Werror -std=gnu++2a -o src/CMakeFiles/main.dir/main.cpp.o -c /home/uy/sandbox/cpp/src/main.cpp",
-  "file": "/home/uy/sandbox/cpp/src/main.cpp"
-}
-]
+build/compile_commands.json

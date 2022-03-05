@@ -16,3 +16,6 @@ target_link_libraries(conditional_variable PRIVATE Threads::Threads)
 
 add_snippet(epoll)
 target_link_libraries(epoll PRIVATE rt)
+
+add_snippet(fmt_string_view)
+target_link_libraries(fmt_string_view PRIVATE fmt::fmt)
