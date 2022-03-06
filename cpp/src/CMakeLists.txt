@@ -24,3 +24,4 @@ add_snippet(macros)
 target_compile_definitions(macros PRIVATE SANDBOX_LED_3)
 
 add_snippet(chrono)
+add_snippet(unique_macro)
