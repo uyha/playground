@@ -28,3 +28,7 @@ add_snippet(unique_macro)
 
 add_snippet(pthread_rwlock)
 target_link_libraries(pthread_rwlock PRIVATE Threads::Threads)
+
+add_snippet(sanitizer)
+target_compile_options(sanitizer PRIVATE -fsanitize=address,undefined,enum,shift)
+target_link_options(sanitizer PRIVATE -fsanitize=address,undefined,enum,shift)
