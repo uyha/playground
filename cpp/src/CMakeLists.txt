@@ -25,3 +25,6 @@ target_compile_definitions(macros PRIVATE SANDBOX_LED_3)
 
 add_snippet(chrono)
 add_snippet(unique_macro)
+
+add_snippet(pthread_rwlock)
+target_link_libraries(pthread_rwlock PRIVATE Threads::Threads)
