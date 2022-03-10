@@ -35,3 +35,6 @@ target_link_options(sanitizer PRIVATE -fsanitize=address,undefined,enum,shift)
 
 add_snippet(message_queue)
 target_link_libraries(message_queue PRIVATE rt)
+
+add_snippet(fstat)
+target_link_libraries(fstat PRIVATE rt)
