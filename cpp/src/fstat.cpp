@@ -4,6 +4,7 @@
 #include <fmt/core.h>
 #include <mqueue.h>
 #include <sys/epoll.h>
+#include <sys/mman.h>
 #include <sys/stat.h>
 #include <unistd.h>
 
@@ -51,7 +52,8 @@ auto to_timepoint(::timespec value) noexcept -> std::chrono::system_clock::time_
 }
 
 int main() {
-  auto const mq_name = "/sandbox.fstat.mq";
+  auto const mq_name  = "/sandbox.fstat.mq";
+  auto const shm_name = "/sandbox.ftruncate.shm";
 
   auto epoll = ::epoll_create1(0);
   struct ::stat epoll_stat {};
@@ -59,12 +61,22 @@ int main() {
   auto mq = ::mq_open(mq_name, O_RDONLY | O_CREAT, 0666, nullptr);
   struct ::stat mq_stat {};
 
+  auto shm = ::shm_open(shm_name, O_RDWR | O_CREAT, 0666);
+  struct ::stat shm_stat {};
+
   fmt::print("epoll+fstat: {} {}\n", epoll, ::fstat(epoll, &epoll_stat));
   fmt::print("mq+fstat: {} {}\n", mq, ::fstat(mq, &mq_stat));
 
   fmt::print("epoll_stat: {}\n", to_timepoint(epoll_stat.st_atim));
   fmt::print("mq_stat:    {}\n", to_timepoint(mq_stat.st_ctim));
 
+  fmt::print("shm+fstat: {} {}\n", shm, ::fstat(shm, &shm_stat));
+  fmt::print("shm_fstat: {}\n", shm_stat);
+  fmt::print("{}\n", ftruncate(shm, 100));
+  fmt::print("shm+fstat: {} {}\n", shm, ::fstat(shm, &shm_stat));
+  fmt::print("shm_fstat: {}\n", shm_stat);
+
   ::mq_unlink(mq_name);
   ::close(epoll);
+  ::shm_unlink(shm_name);
 }

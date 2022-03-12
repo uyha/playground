@@ -38,3 +38,6 @@ target_link_libraries(message_queue PRIVATE rt)
 
 add_snippet(fstat)
 target_link_libraries(fstat PRIVATE rt)
+
+add_snippet(ftruncate)
+target_link_libraries(ftruncate PRIVATE rt)
