@@ -41,3 +41,5 @@ target_link_libraries(fstat PRIVATE rt)
 
 add_snippet(ftruncate)
 target_link_libraries(ftruncate PRIVATE rt)
+
+add_snippet(error_code)
