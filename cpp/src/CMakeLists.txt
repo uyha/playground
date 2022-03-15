@@ -43,3 +43,4 @@ add_snippet(ftruncate)
 target_link_libraries(ftruncate PRIVATE rt)
 
 add_snippet(error_code)
+target_sources(error_code PRIVATE error_code.impl.cpp)

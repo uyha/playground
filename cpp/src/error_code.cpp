@@ -1,37 +1,36 @@
 #include <fmt/core.h>
 #include <system_error>
 
-enum class MyError {
-  first = 1,
-  second,
-  third,
-  fourth,
+namespace lpipp {
+struct SomeStruct {
+  enum class SomeEnum {};
+  friend auto make_error_code(SomeEnum) -> std::error_code;
 };
-
-namespace {
-struct MyErrorCategory : std::error_category {
-  auto name() const noexcept -> char const * override {
-    return "My Error";
-  }
-  auto message(int condition) const -> std::string override {
-    switch (static_cast<MyError>(condition)) {
-    case MyError::first:
-      return "First Error";
-    default:
-      return "Unknwon error";
-    }
-  }
-};
-const MyErrorCategory my_error_category{};
-} // namespace
+} // namespace lpipp
 
 template <>
-struct std::is_error_code_enum<MyError> : std::true_type {};
-auto make_error_code(MyError error) -> std::error_code {
-  return {static_cast<int>(error), my_error_category};
+struct std::is_error_code_enum<lpipp::SomeStruct::SomeEnum> : std::true_type {};
+
+namespace {
+struct SomeEnumCategory : std::error_category {
+  auto name() const noexcept -> char const * override {
+    return "SomeEnumCategory";
+  }
+  auto message(int) const -> std::string override {
+    return "Unknown error";
+  }
+};
+
+SomeEnumCategory some_enum_category{};
+} // namespace
+
+namespace lpipp {
+auto make_error_code(lpipp::SomeStruct::SomeEnum) -> std::error_code {
+  return {static_cast<int>(1), some_enum_category};
 }
+} // namespace lpipp
 
 int main() {
-  std::error_code err = MyError::first;
+  std::error_code err = (lpipp::SomeStruct::SomeEnum)(1);
   fmt::print("{}\n", err.message());
 }
