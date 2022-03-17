@@ -26,7 +26,7 @@ struct fmt::formatter<struct ::stat> {
   template <typename Context>
   auto format(struct ::stat const &value, Context &context) -> decltype(context.out()) {
     return format_to(context.out(),
-                     "{{st_dev = {}, st_ino = {}, st_mode = {:04o}, st_nlink = {}, st_uid = {}, "
+                     "{{st_dev = {}, st_ino = {}, st_mode = 0{:o}, st_nlink = {}, st_uid = {}, "
                      "st_gid = {}, st_rdev = {}, st_size = {}, st_blksize = {}, st_blocks = {}, "
                      "st_atim = {}, st_mtim = {}, st_ctim = {}}}",
                      value.st_dev,
@@ -58,6 +58,9 @@ int main() {
   auto epoll = ::epoll_create1(0);
   struct ::stat epoll_stat {};
 
+  auto dup_epoll = ::dup(epoll);
+  struct ::stat dup_epoll_stat {};
+
   auto mq = ::mq_open(mq_name, O_RDONLY | O_CREAT, 0666, nullptr);
   struct ::stat mq_stat {};
 
@@ -65,13 +68,19 @@ int main() {
   struct ::stat shm_stat {};
 
   fmt::print("epoll+fstat: {} {}\n", epoll, ::fstat(epoll, &epoll_stat));
+  fmt::print("dup_epoll+fstat: {} {}\n", epoll, ::fstat(dup_epoll, &dup_epoll_stat));
   fmt::print("mq+fstat: {} {}\n", mq, ::fstat(mq, &mq_stat));
-
-  fmt::print("epoll_stat: {}\n", to_timepoint(epoll_stat.st_atim));
-  fmt::print("mq_stat:    {}\n", to_timepoint(mq_stat.st_ctim));
-
   fmt::print("shm+fstat: {} {}\n", shm, ::fstat(shm, &shm_stat));
+
+  fmt::print("\n");
+
+  fmt::print("epoll_stat: {}\n", epoll_stat);
+  fmt::print("dup_epoll_stat: {}\n", dup_epoll_stat);
+  fmt::print("mq_stat:    {}\n", mq_stat);
   fmt::print("shm_fstat: {}\n", shm_stat);
+
+  fmt::print("\n");
+
   fmt::print("{}\n", ftruncate(shm, 100));
   fmt::print("shm+fstat: {} {}\n", shm, ::fstat(shm, &shm_stat));
   fmt::print("shm_fstat: {}\n", shm_stat);
