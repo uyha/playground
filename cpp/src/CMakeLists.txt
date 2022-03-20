@@ -50,3 +50,6 @@ target_link_libraries(fchown PRIVATE rt)
 
 add_snippet(flock)
 target_link_libraries(flock PRIVATE rt)
+
+add_snippet(benchmark)
+target_link_libraries(benchmark PRIVATE rt)
