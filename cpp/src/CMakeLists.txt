@@ -47,3 +47,6 @@ target_sources(error_code PRIVATE error_code.impl.cpp)
 
 add_snippet(fchown)
 target_link_libraries(fchown PRIVATE rt)
+
+add_snippet(flock)
+target_link_libraries(flock PRIVATE rt)
