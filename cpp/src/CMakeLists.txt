@@ -53,3 +53,6 @@ target_link_libraries(flock PRIVATE rt)
 
 add_snippet(benchmark)
 target_link_libraries(benchmark PRIVATE rt)
+
+add_snippet(unix_socket_server)
+add_snippet(unix_socket_client)
