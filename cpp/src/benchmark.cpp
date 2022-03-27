@@ -1,10 +1,13 @@
 #include <chrono>
 #include <fcntl.h>
 #include <fmt/chrono.h>
+#include <string_view>
 #include <sys/file.h>
 #include <sys/mman.h>
 
-int main() {
+using namespace std::string_view_literals;
+
+void shm() {
   auto const shm_name = "/sandbox.flock.shm";
 
   auto shm = ::shm_open(shm_name, O_RDONLY | O_CREAT, 0666);
@@ -21,4 +24,28 @@ int main() {
 
   auto const end = std::chrono::steady_clock::now();
   fmt::print("{}\n", (end - start) / loop);
+}
+
+void string_compare() {
+  auto const s1 =
+      "asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf"sv;
+  auto const s2 =
+      "asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf"sv;
+  auto const start = std::chrono::steady_clock::now();
+
+  (void)(s1 == s2);
+
+  auto const end = std::chrono::steady_clock::now();
+  fmt::print("{}\n", end - start);
+}
+
+int main([[maybe_unused]] int argc, [[maybe_unused]] char **argv) {
+  if (argc > 1) {
+    if (argv[1] == "shm"sv) {
+      shm();
+    }
+    if (argv[1] == "string_compare"sv) {
+      string_compare();
+    }
+  }
 }

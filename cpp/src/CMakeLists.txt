@@ -54,5 +54,8 @@ target_link_libraries(flock PRIVATE rt)
 add_snippet(benchmark)
 target_link_libraries(benchmark PRIVATE rt)
 
-add_snippet(unix_socket_server)
-add_snippet(unix_socket_client)
+add_snippet(unix_socket_dgram_server)
+add_snippet(unix_socket_dgram_client)
+
+add_snippet(unix_socket_stream_server)
+add_snippet(unix_socket_stream_client)
