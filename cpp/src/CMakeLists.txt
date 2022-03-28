@@ -65,3 +65,5 @@ add_snippet(socket)
 add_snippet(quote_line)
 
 add_snippet(protocol_entry)
+
+add_snippet(variadic_template)
