@@ -59,3 +59,9 @@ add_snippet(unix_socket_dgram_client)
 
 add_snippet(unix_socket_stream_server)
 add_snippet(unix_socket_stream_client)
+
+add_snippet(socket)
+
+add_snippet(quote_line)
+
+add_snippet(protocol_entry)
