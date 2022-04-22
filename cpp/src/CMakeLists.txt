@@ -68,3 +68,4 @@ add_snippet(protocol_entry)
 
 add_snippet(variadic_template)
 add_snippet(ctad)
+add_snippet(padding)
