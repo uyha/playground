@@ -56,3 +56,5 @@ target_link_libraries(benchmark PRIVATE rt)
 
 add_snippet(unix_socket_server)
 add_snippet(unix_socket_client)
+
+add_snippet(member_function)
