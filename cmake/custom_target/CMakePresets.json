@@ -1,0 +1,30 @@
+{
+  "version": 3,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 21,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "name",
+      "displayName": "Display Name",
+      "description": "Description for this preset",
+      "generator": "Unix Makefiles",
+      "binaryDir": "${sourceDir}/cmake-build-${presetName}",
+      "cacheVariables": {},
+      "environment": {}
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "name",
+      "displayName": "Display Name",
+      "description": "Description for this preset",
+      "environment": {},
+      "configurePreset": "name",
+      "targets": []
+    }
+  ],
+  "testPresets": []
+}
