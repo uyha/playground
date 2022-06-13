@@ -6,9 +6,9 @@
 void server() {
   auto s = ::socket(AF_UNIX, SOCK_STREAM, 0);
   ::sockaddr_un addr{};
-  addr.sun_family     = AF_UNIX;
-  socklen_t length    = sizeof(addr);
-  decltype(auto) path = "/tmp/un";
+  addr.sun_family                   = AF_UNIX;
+  [[maybe_unused]] socklen_t length = sizeof(addr);
+  decltype(auto) path               = "/tmp/un";
   std::memcpy(addr.sun_path, path, std::size(path));
   fmt::print("{}\n", ::remove(path));
   fmt::print("{}\n", ::bind(s, reinterpret_cast<::sockaddr *>(&addr), sizeof(addr)));

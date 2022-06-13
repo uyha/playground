@@ -10,7 +10,7 @@
       "name": "default",
       "displayName": "Default Config",
       "description": "Default build using Ninja generator",
-      "generator": "Ninja",
+      "generator": "Unix Makefiles",
       "binaryDir": "${sourceDir}/build",
       "cacheVariables": {
         "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
