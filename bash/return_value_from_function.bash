@@ -2,14 +2,22 @@
 
 set -e
 
-return-true(){
+return-1() {
+  return 1
+}
+
+return-0() {
+  return 0
+}
+
+return-true() {
   true
 }
 
-return-false(){
+return-false() {
   false
 }
 
 echo "Will be printed"
-false
+return-0
 echo "Won't be printed"
