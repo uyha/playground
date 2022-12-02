@@ -1,7 +1,6 @@
 #include <chrono>
 #include <fmt/printf.h>
 
-
 int main() {
   using namespace std::chrono_literals;
 
