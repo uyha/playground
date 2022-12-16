@@ -1,0 +1,6 @@
+sandbox_add_executable(client)
+sandbox_add_executable(server)
+sandbox_add_executable(version)
+sandbox_add_executable(taskvent)
+sandbox_add_executable(taskwork)
+sandbox_add_executable(tasksink)
