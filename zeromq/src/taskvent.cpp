@@ -16,6 +16,8 @@ int main() {
   auto sender  = zmq::socket_t{context, zmq::socket_type::push};
   sender.bind("tcp://*:5557");
 
+  ::getchar();
+
   auto sink = zmq::socket_t{context, zmq::socket_type::push};
   sink.connect("tcp://localhost:5558");
 
