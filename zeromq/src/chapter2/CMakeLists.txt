@@ -1,0 +1,2 @@
+sandbox_add_executable(msreader)
+sandbox_add_executable(mspoller)
