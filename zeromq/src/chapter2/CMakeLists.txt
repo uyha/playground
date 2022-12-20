@@ -11,3 +11,5 @@ sandbox_add_executable(wuproxy)
 
 sandbox_add_executable(taskwork2)
 sandbox_add_executable(tasksink2)
+
+sandbox_add_executable(interrupt)
