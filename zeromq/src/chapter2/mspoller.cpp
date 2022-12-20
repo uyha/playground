@@ -29,15 +29,8 @@ int main() {
       }
     }
     if (items[1].revents & ZMQ_POLLIN) {
-      {
-        if (auto result = subscriber.recv(msg); result) {
-          fmt::print("Subscriber: {}\n", msg.to_string_view());
-        }
-      }
-      while (msg.get(ZMQ_MORE)) {
-        if (auto result = subscriber.recv(msg); result) {
-          fmt::print("More: {}\n", msg.to_string_view());
-        }
+      if (auto result = subscriber.recv(msg); result) {
+        fmt::print("Subscriber: {}\n", msg.to_string_view());
       }
     }
   }
