@@ -8,3 +8,6 @@ sandbox_add_executable(rrbroker)
 sandbox_add_executable(msgqueue)
 
 sandbox_add_executable(wuproxy)
+
+sandbox_add_executable(taskwork2)
+sandbox_add_executable(tasksink2)
