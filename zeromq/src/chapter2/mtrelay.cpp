@@ -11,7 +11,6 @@ auto step1(zmq::context_t &context) {
 auto step2(zmq::context_t &context) {
   auto receiver = zmq::socket_t{context, zmq::socket_type::pair};
   receiver.bind("inproc://step2");
-  receiver.send(zmq::const_buffer{"", 0});
 
   auto step1_thread = std::jthread{step1, std::ref(context)};
 
