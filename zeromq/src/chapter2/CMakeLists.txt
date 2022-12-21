@@ -15,3 +15,5 @@ sandbox_add_executable(tasksink2)
 sandbox_add_executable(interrupt)
 
 sandbox_add_executable(mtserver)
+
+sandbox_add_executable(mtrelay)
