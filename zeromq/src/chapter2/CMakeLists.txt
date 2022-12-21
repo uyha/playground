@@ -13,3 +13,5 @@ sandbox_add_executable(taskwork2)
 sandbox_add_executable(tasksink2)
 
 sandbox_add_executable(interrupt)
+
+sandbox_add_executable(mtserver)
