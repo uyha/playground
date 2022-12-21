@@ -4,6 +4,12 @@ project("ProjectName"
         LANGUAGES CXX)
 
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake ${CMAKE_MODULE_PATH})
-include(Ccache)
+
+option(PRECOMPILE "" ON)
+option(USE_CCACHE "" ON)
+
+if(USE_CCACHE)
+  include(Ccache)
+endif()
 
 add_subdirectory(src)

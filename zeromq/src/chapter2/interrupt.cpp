@@ -1,5 +1,6 @@
 #include <csignal>
 #include <fcntl.h>
+#include <fmt/printf.h>
 #include <unistd.h>
 #include <zmq.hpp>
 
