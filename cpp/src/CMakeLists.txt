@@ -72,3 +72,5 @@ add_snippet(variadic_template)
 add_snippet(ctad)
 add_snippet(padding)
 add_snippet(un)
+
+add_snippet(member_count)
