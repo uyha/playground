@@ -20,3 +20,6 @@ sandbox_add_executable(mtrelay)
 
 sandbox_add_executable(syncpub)
 sandbox_add_executable(syncsub)
+
+sandbox_add_executable(psenvpub)
+sandbox_add_executable(psenvsub)
