@@ -17,3 +17,6 @@ sandbox_add_executable(interrupt)
 sandbox_add_executable(mtserver)
 
 sandbox_add_executable(mtrelay)
+
+sandbox_add_executable(syncpub)
+sandbox_add_executable(syncsub)
