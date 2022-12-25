@@ -1,6 +1,8 @@
-sandbox_add_executable(client)
-sandbox_add_executable(server)
+sandbox_add_executable(hwclient)
+sandbox_add_executable(hwserver)
+
 sandbox_add_executable(version)
+
 sandbox_add_executable(wuserver)
 sandbox_add_executable(wuclient)
 sandbox_add_executable(taskvent)
