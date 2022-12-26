@@ -1,3 +1,5 @@
 sandbox_add_executable(lpclient)
 sandbox_add_executable(lpserver)
 
+sandbox_add_executable(spqueue)
+sandbox_add_executable(spworker)
