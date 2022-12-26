@@ -15,17 +15,12 @@ int main() {
   auto sequence = 0;
   fmt::print("Entering while loop...\n");
   for (auto retries_left = 3; retries_left > 0;) {
-    fmt::print("{} retries left\n", retries_left);
     client.send(zmq::message_t{fmt::format("{}", ++sequence)}, zmq::send_flags::none);
 
     while (true) {
-      fmt::print("Expecting reply...\n");
-
       auto items = std::array<zmq::pollitem_t, 1>{zmq::pollitem_t{client, 0, ZMQ_POLLIN, 0}};
 
-      fmt::print("Polling...\n");
       auto rc = zmq::poll(items, 500ms);
-      fmt::print("Polling Done...\n");
       assert(rc != -1);
 
       if (std::get<0>(items).revents & ZMQ_POLLIN) {
