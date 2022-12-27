@@ -55,7 +55,7 @@ int main() {
             break;
           } else if (cycles > 3 and gen(rng) == 1) {
             fmt::print("I: simulating CPU overload\n");
-            std::this_thread::sleep_for(3000ms);
+            std::this_thread::sleep_for(300ms);
           }
           fmt::print("I: normal reply\n");
           assert(worker.send(zmq::message_t{}, zmq::send_flags::sndmore));

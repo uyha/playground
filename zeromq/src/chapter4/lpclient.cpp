@@ -44,6 +44,7 @@ int main() {
           client = zmq::socket_t{context, zmq::socket_type::req};
           client.set(zmq::sockopt::linger, 0); // Prevent context to hang forever when destructing
           client.connect(server_endpoint);
+          client.send(zmq::message_t{fmt::format("{}", ++sequence)}, zmq::send_flags::none);
         }
       }
     }
