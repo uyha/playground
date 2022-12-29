@@ -42,7 +42,7 @@ int main() {
         workers.push_back({.identity = identity, .last_sent = clock::now()});
       } else {
         iter->last_sent = clock::now();
-        std::rotate(iter, std::next(iter), std::end(workers));
+        workers.splice(iter, workers, std::next(iter), std::end(workers));
       }
 
       assert(backend.recv(message)); // Empty delimiter frame
