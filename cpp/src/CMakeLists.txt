@@ -3,6 +3,7 @@ include(use_conan)
 
 find_package(fmt)
 find_package(Threads)
+find_package(lely REQUIRED)
 
 function(add_snippet name)
   add_executable(${name} ${name}.cpp)
@@ -74,3 +75,6 @@ add_snippet(padding)
 add_snippet(un)
 
 add_snippet(member_count)
+
+add_snippet(lely)
+target_link_libraries(lely PRIVATE lely::io2)
