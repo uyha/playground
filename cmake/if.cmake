@@ -1,0 +1,6 @@
+set(path /)
+if(IS_ABSOLUTE path)
+  message(STATUS "Does deref variable")
+else()
+  message(STATUS "No deref variable")
+endif()

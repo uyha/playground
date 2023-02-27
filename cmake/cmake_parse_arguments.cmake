@@ -1,0 +1,20 @@
+function(func)
+  cmake_parse_arguments(arg "ALL" "OUT" "MANY" ${ARGN})
+  message(STATUS ${arg_ALL})
+  if(arg_OUT)
+    message(STATUS "OUT is ${arg_OUT}")
+  else()
+    message(STATUS "No OUT")
+  endif()
+
+  if(arg_MANY)
+    message(STATUS "MANY is ${arg_MANY}")
+  else()
+    message(STATUS "No MANY")
+  endif()
+endfunction()
+
+func()
+func(ALL OUT out)
+func(ALL OUT out MANY 1 2 3)
+
