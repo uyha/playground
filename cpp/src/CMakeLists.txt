@@ -1,9 +1,10 @@
-include(build_options)
-include(use_conan)
+include(CompileOptions)
+include(Conan)
 
-find_package(fmt)
+find_package(fmt REQUIRED)
 find_package(Threads)
-find_package(lely REQUIRED)
+find_package(msgpack REQUIRED)
+find_package(lely-core REQUIRED)
 
 function(add_snippet name)
   add_executable(${name} ${name}.cpp)
@@ -76,5 +77,8 @@ add_snippet(un)
 
 add_snippet(member_count)
 
-add_snippet(lely)
-target_link_libraries(lely PRIVATE lely::io2)
+add_snippet(msgpack)
+target_link_libraries(msgpack PRIVATE msgpackc-cxx)
+
+add_snippet(lely-core)
+target_link_libraries(lely-core PRIVATE lely-core::lely-core)

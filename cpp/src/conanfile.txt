@@ -1,6 +1,0 @@
-[requires]
-fmt/9.1.0
-lely/2.3.1@lely/testing
-
-[generators]
-cmake_find_package
