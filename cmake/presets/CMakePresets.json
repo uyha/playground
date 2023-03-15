@@ -1,0 +1,39 @@
+{
+  "version": 3,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 21,
+    "patch": 3
+  },
+  "configurePresets": [
+    {
+      "name": "default",
+      "hidden": true,
+      "generator": "Unix Makefiles",
+      "binaryDir": "${sourceDir}/cmake-build-${presetName}"
+    },
+    {
+      "name": "cross-compile",
+      "hidden": true,
+      "environment": {
+        "CROSS_COMPILE": "arm-linux-gnueabihf-"
+      }
+    },
+    {
+      "name": "gcc-10",
+      "hidden": true,
+      "environment": {
+        "AR": "$env{CROSS_COMPILE}ar",
+        "AS": "$env{CROSS_COMPILE}as",
+        "RANLIB": "$env{CROSS_COMPILE}ranlib",
+        "CC": "$env{CROSS_COMPILE}gcc",
+        "CXX": "$env{CROSS_COMPILE}g++",
+        "STRIP": "$env{CROSS_COMPILE}strip"
+      }
+    },
+    {
+      "name": "cross-compile-gcc-10",
+      "inherits": ["default", "gcc-10", "cross-compile"]
+    }
+  ]
+}
