@@ -12,14 +12,14 @@ if(PRECOMPILE)
     <thread>
     <zmq.hpp>
     )
-  target_link_libraries(sandbox_pch PRIVATE cppzmq::cppzmq fmt::fmt)
+  target_link_libraries(sandbox_pch PRIVATE cppzmq fmt::fmt)
   target_compile_features(sandbox_pch PRIVATE cxx_std_20)
   target_compile_options(sandbox_pch PRIVATE ${warnings} ${wae})
 endif()
 
 macro(sandbox_add_executable name)
   add_executable("${name}" "${name}.cpp" ${ARGN})
-  target_link_libraries("${name}" PRIVATE cppzmq::cppzmq fmt::fmt)
+  target_link_libraries("${name}" PRIVATE cppzmq fmt::fmt)
   target_compile_features("${name}" PRIVATE cxx_std_20)
   target_compile_options("${name}" PRIVATE ${warnings} ${wae})
   if(PRECOMPILE)

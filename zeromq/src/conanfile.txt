@@ -3,4 +3,4 @@ fmt/8.1.1
 cppzmq/4.9.0
 
 [generators]
-cmake_find_package
+CMakeDeps
