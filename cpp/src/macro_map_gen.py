@@ -3,7 +3,7 @@
 from jinja2 import Environment
 
 limit = 255
-prefix = "NEOBOT_"
+prefix = ""
 
 result = (
     Environment()
@@ -26,11 +26,11 @@ _{{ i }},
 #define {{prefix}}TAIL_IMPL(x, ...) (__VA_ARGS__)
 #define {{prefix}}TAIL(...) {{prefix}}EVAL({{prefix}}TAIL_IMPL(__VA_ARGS__))
 
-#define {{prefix}}TRANSFORM(name, args) ({{prefix}}GLUE({{prefix}}TRANSFORM_, {{prefix}}VARCOUNT args)(name, args))
+#define {{prefix}}TRANSFORM(name, args) {{prefix}}GLUE({{prefix}}TRANSFORM_, {{prefix}}VARCOUNT args)(name, args)
 #define {{prefix}}TRANSFORM_1(name, args) name args
 
 {% for i in range(2, limit +1) -%}
-#define {{prefix}}TRANSFORM_{{ i }}(name, args) name_({{prefix}}HEAD args), {{prefix}}TRANSFORM_{{ i-1 }}(name, {{prefix}}TAIL args)
+#define {{prefix}}TRANSFORM_{{ i }}(name, args) name({{prefix}}HEAD args) {{prefix}}TRANSFORM_{{ i-1 }}(name, {{prefix}}TAIL args)
 {% endfor -%}
 // clang-format on
 """
