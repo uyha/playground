@@ -18,3 +18,6 @@ func()
 func(ALL OUT out)
 func(ALL OUT out MANY 1 2 3)
 
+function(a)
+asdasd()
+endfunction()

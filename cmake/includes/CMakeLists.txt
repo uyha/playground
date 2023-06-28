@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 3.21)
+project(ProjectName VERSION 0.1.0 LANGUAGES CXX)
+
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/sub1")
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/sub2")
+
+include(packaging)
