@@ -1,6 +1,7 @@
 #include <array>
 #include <fmt/printf.h>
 #include <string>
+#include <thread>
 #include <type_traits>
 
 struct UniversalType {
@@ -31,8 +32,8 @@ static_assert(std::is_aggregate_v<B>);
 template <typename T>
 consteval auto fn() {
   if constexpr (not requires {
-                      T{UniversalType{}, UniversalType{}, UniversalType{}, UniversalType{}};
-                    }) {
+                  T{UniversalType{}, UniversalType{}, UniversalType{}, UniversalType{}};
+                }) {
     return 3;
   }
   return 0;

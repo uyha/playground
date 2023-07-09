@@ -82,3 +82,6 @@ target_link_libraries(msgpack PRIVATE msgpackc-cxx)
 
 add_snippet(lely-core)
 target_link_libraries(lely-core PRIVATE lely-core::lely-core)
+
+add_snippet(exec)
+target_link_libraries(exec PRIVATE fmt::fmt)

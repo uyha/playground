@@ -23,6 +23,6 @@ int main() {
   for (auto i = 0; i < 1'000'000; ++i) {
     cond_var.notify_one();
   }
-  auto dur = (steady_clock::now() - start)/1'000'000;
+  auto dur = (steady_clock::now() - start) / 1'000'000;
   fmt::print("{}\n", dur);
 }

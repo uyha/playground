@@ -2,6 +2,7 @@
 #include <fmt/ranges.h>
 #include <iterator>
 #include <netdb.h>
+#include <vector>
 
 struct NullSentinel {
   template <typename T>
@@ -29,10 +30,14 @@ struct fmt::formatter<::protoent> {
   }
   template <typename Context>
   auto format(::protoent const &value, Context &context) -> decltype(context.out()) {
+    auto aliases = std::vector<std::string>{};
+    for (auto begin = value.p_aliases; *begin != nullptr; ++begin) {
+      aliases.push_back(*begin);
+    }
     return format_to(context.out(),
                      "{{p_name = {}, p_aliases = {}, p_proto = {}}}",
                      value.p_name,
-                     fmt::join(value.p_aliases, NullSentinel{}, ", "),
+                     aliases,
                      value.p_proto);
   }
 };

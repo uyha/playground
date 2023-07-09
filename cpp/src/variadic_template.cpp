@@ -1,5 +1,6 @@
 #include <cassert>
 #include <fmt/format.h>
+#include <optional>
 #include <string_view>
 #include <type_traits>
 #include <variant>
