@@ -85,3 +85,5 @@ target_link_libraries(lely-core PRIVATE lely-core::lely-core)
 
 add_snippet(exec)
 add_snippet(timerfd)
+
+add_snippet(lambda)

@@ -22,32 +22,25 @@ template <typename>
 struct print_type;
 
 namespace detail {
-template <typename Fn, typename T = void>
-class Impl
-    : boost::sml::aux::zero_wrapper<Fn, T>
+template <auto fn>
+class ProduceImpl
+    : river::fn<fn>
     , public boost::sml::front::action_base {
 public:
-  template <typename TFn>
-  constexpr Impl(TFn &&in_fn)
-      : boost::sml::aux::zero_wrapper<Fn, T>{std::forward<TFn>(in_fn)} {}
-
   template <class Event, class TSM, class TDeps, class TSubs>
   constexpr void operator()(const Event &event, TSM &sm, TDeps &deps, TSubs &subs) {
     using namespace boost::sml::aux;
     using namespace boost::sml::front;
 
     get<get_root_sm_t<TSubs>>(subs).process_.push([&, this]<typename... Args>(river::type_list<Args...>) {
-      return zero_wrapper<Fn, T>::operator()(get_arg(type<Args>{}, event, sm, deps)...);
-    }(typename river::fn_trait<decltype(&zero_wrapper<Fn, T>::operator())>::arguments{}));
+      return river::fn<fn>::operator()(get_arg(type<Args>{}, event, sm, deps)...);
+    }(typename river::fn_trait_of<river::fn<fn>{}>::arguments{}));
   }
 };
-
 } // namespace detail
 
-template <typename Fn>
-constexpr auto extract(Fn &&fn) {
-  return detail::Impl<Fn, Fn>{std::forward<Fn>(fn)};
-}
+template <auto fn>
+static constexpr auto produce = detail::ProduceImpl<fn>();
 
 struct e2 {};
 
@@ -59,32 +52,46 @@ auto fn(State) {
   return e2{};
 }
 
-struct SM {
-  struct s1 {};
-  struct s2 {};
-
-  struct e1 {};
-  auto operator()() {
+template <auto fn>
+struct Produce {
+public:
+  constexpr auto operator()() const {
     using namespace boost::sml;
-    return make_transition_table(
-        *state<s1>
-            + event<e1>
-                  / (extract([](State state) { return state.e; }),
-                     [] {
-                       fmt::print("{}:{}\n", __FILE__, __LINE__);
-                       (void)::fflush(::stdout);
-                     }) = state<s1>,
-        state<s1> + event<e2> / [](State &) {
-          fmt::print("{}:{}\n", __FILE__, __LINE__);
-          (void)::fflush(::stdout);
-        } = X);
+
+    return []<typename... Args>(river::type_list<Args...>) {
+      return make_transition_table(
+          *state<entry> + on_entry<_> / produce<fn>,
+          // This is a workaround since the `sml` library doesn't register the
+          // dependencies to its object pool which leads to compilation error, the
+          // following transition forces `sml` to register the arguments needed for the
+          // `ProduceImpl` to be callable. Check
+          // https://github.com/boost-ext/sml/issues/437 for more details
+          state<never> + event<never> / [](Args...) {});
+    }(typename river::fn_trait_of<river::fn<fn>{}>::arguments{});
+  }
+
+private:
+  struct entry {};
+
+  struct never {};
+};
+
+struct e1 {};
+
+#define line [] { fmt::print("{}\n", __LINE__); }
+
+struct Demo {
+  struct s1 : Produce<[] { return e1{}; }> {};
+
+  auto operator()() const {
+    using namespace boost::sml;
+
+    return make_transition_table(*state<s1> + event<e1> / line);
   }
 };
 
 int main() {
   using namespace boost::sml;
 
-  State state{};
-  auto s = sm<SM, process_queue<std::queue>>{state};
-  s.process_event(SM::e1{});
+  auto demo = sm<Demo, process_queue<std::queue>>{};
 }

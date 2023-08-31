@@ -5,9 +5,9 @@ find_package(fmt REQUIRED)
 find_package(sml REQUIRED)
 
 file(DOWNLOAD
-  [[https://raw.githubusercontent.com/uyha/fn/master/src/river/fn.hpp]]
+  "https://raw.githubusercontent.com/uyha/fn/v0.3/src/river/fn.hpp"
   "${CMAKE_CURRENT_BINARY_DIR}/include/river/fn.hpp"
-  EXPECTED_HASH SHA256=00b0aa1b69db841e24e451846eb987c2350603337bbc572dea80d820b249daf2
+  EXPECTED_HASH SHA256=8edfdb83d7803db812446d467c9ef85d86427f55fe805ffd9e971fe0a640dbca
 )
 
 add_executable(main "main.cpp")

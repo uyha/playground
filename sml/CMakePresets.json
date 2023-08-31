@@ -16,7 +16,9 @@
         "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
         "USE_CONAN": "ON",
         "CONAN_PROFILE_HOST": "${sourceDir}/data/conan/x86_64.conf",
-        "CONAN_AUTODETECT": "ON"
+        "CONAN_AUTODETECT": "ON",
+        "CMAKE_CXX_STANDARD": "20",
+        "CMAKE_CXX_COMPILER": "g++-10"
       },
       "environment": {}
     },
