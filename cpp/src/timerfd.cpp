@@ -11,7 +11,7 @@ auto basic() -> void {
   auto timer = ::timerfd_create(CLOCK_MONOTONIC, 0);
   auto spec  = ::itimerspec{
        .it_interval = {.tv_sec = 1, .tv_nsec = 0},
-       .it_value    = {.tv_sec = 1, .tv_nsec = 0},
+       .it_value    = {.tv_sec = 0, .tv_nsec = 1},
   };
 
   [[maybe_unused]] auto buffer = std::uint64_t{};
@@ -70,6 +70,6 @@ auto canceling() -> void {
 }
 
 int main() {
-  // basic();
-  canceling();
+  basic();
+  // canceling();
 }

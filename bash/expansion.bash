@@ -2,7 +2,9 @@
 
 set -euo pipefail
 
-root="${root:-/opt}"
-install_dir="${install_dir:-$root/local}"
+# root="${root:-/opt}"
+# install_dir="${install_dir:-$root/local}"
+#
+# echo "$root $install_dir"
 
-echo "$root $install_dir"
+echo "${1:-can}"

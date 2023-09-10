@@ -10,13 +10,14 @@ file(DOWNLOAD
   EXPECTED_HASH SHA256=8edfdb83d7803db812446d467c9ef85d86427f55fe805ffd9e971fe0a640dbca
 )
 
-add_executable(main "main.cpp")
-target_link_libraries(main PRIVATE fmt::fmt)
-target_compile_features(main PRIVATE cxx_std_20)
-target_compile_options(main PRIVATE ${warnings} ${wae})
+function(add_sandbox name)
+  add_executable(${name} ${name}.cpp)
+  target_link_libraries(${name} PRIVATE sml::sml fmt::fmt)
+  target_include_directories(${name} PRIVATE "${CMAKE_CURRENT_BINARY_DIR}/include")
+  target_compile_features(${name} PRIVATE cxx_std_20)
+  target_compile_options(${name} PRIVATE ${warnings} ${wae})
+endfunction()
 
-add_executable(sandbox-sml sml.cpp)
-target_link_libraries(sandbox-sml PRIVATE sml::sml fmt::fmt)
-target_include_directories(sandbox-sml PRIVATE "${CMAKE_CURRENT_BINARY_DIR}/include")
-target_compile_features(sandbox-sml PRIVATE cxx_std_20)
-target_compile_options(sandbox-sml PRIVATE ${warnings} ${wae})
+add_sandbox(sml)
+add_sandbox(entry-exit)
+add_sandbox(duplicate-deps)

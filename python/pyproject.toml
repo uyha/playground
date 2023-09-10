@@ -3,7 +3,7 @@ venvPath = "/home/uy/.cache/pypoetry/virtualenvs/"
 venv = "python-FI1wZDET-py3.10"
 
 [tool.poetry]
-name = "python"
+name = "sandbox"
 version = "0.1.0"
 description = ""
 authors = ["Your Name <you@example.com>"]
