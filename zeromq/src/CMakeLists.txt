@@ -5,6 +5,10 @@ find_package(cppzmq REQUIRED)
 find_package(fmt REQUIRED)
 
 if(PRECOMPILE)
+  add_custom_command(
+    OUTPUT dummy.cpp
+    COMMAND "${CMAKE_COMMAND}" -E touch dummy.cpp
+  )
   add_library(sandbox_pch dummy.cpp)
   target_precompile_headers(sandbox_pch PUBLIC
     <chrono>
