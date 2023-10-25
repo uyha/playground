@@ -1,0 +1,36 @@
+build := "release"
+
+build:
+  cmake --build cmake-build-{{build}}
+
+config:
+  cmake -E make_directory cmake-build-{{build}}/.cmake/api/v1/query/client-cmoid
+  cmake -E touch cmake-build-{{build}}/.cmake/api/v1/query/client-cmoid/codemodel-v2
+  cmake --preset={{build}}
+
+list type="executable":
+  #!/usr/bin/env bash
+  set -euo pipefail
+  if [[ ! -d "cmake-build-{{build}}" ]]; then
+    echo "The project is not configured, please configured it first" >&2
+    exit 1
+  fi
+  type={{type}}
+  cd cmake-build-{{build}}/.cmake/api/v1/reply
+  index="$(find -name 'codemodel-v2*')"
+  targets="$(cat "$index" | jq -r '.configurations[0].targets | length')"
+  for (( i = 0; i < targets; ++i )); do
+    target="$(cat "$index" | jq -r ".configurations[0].targets[$i].jsonFile")"
+    if [[ "$(cat "$target" | jq -r ".type")" == "${type^^}" ]]; then
+      echo "$(cat "$target" | jq -r ".name")"
+    fi
+  done
+
+run executable:
+  #!/usr/bin/env bash
+  set -euo pipefail
+  cmake --build "cmake-build-{{build}}" --target "{{executable}}"
+  cd "cmake-build-{{build}}/.cmake/api/v1/reply"
+  path="$(cat "$(find -name 'target-{{executable}}*.json' )" | jq -r '.paths.build + "/" + .name')"
+  cd "{{justfile_directory()}}"
+  "./cmake-build-{{build}}/$path"
