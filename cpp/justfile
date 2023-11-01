@@ -1,0 +1,5 @@
+build:
+  cmake --build build -j$(halfproc)
+
+config:
+  cmake --preset default

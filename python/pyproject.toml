@@ -1,20 +1,18 @@
-[tool.pyright]
-venvPath = "/home/uy/.cache/pypoetry/virtualenvs/"
-venv = "python-FI1wZDET-py3.10"
-
-[tool.poetry]
+[project]
 name = "sandbox"
 version = "0.1.0"
 description = ""
-authors = ["Your Name <you@example.com>"]
-
-[tool.poetry.dependencies]
-python = "^3.9"
-jinja2 = "*"
-
-[tool.poetry.dev-dependencies]
-pytest = "^5.2"
+authors = [{ name = "Uy Ha", email = "hchanuy@gmail.com" }]
+dependencies = [
+    "Jinja2>=3.1.2",
+    "tree-sitter>=0.20.2",
+    "disutils>=1.4.32.post2",
+    "setuptools>=68.2.2",
+]
+requires-python = ">=3.11"
+readme = "README.md"
+license = { text = "MIT" }
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"

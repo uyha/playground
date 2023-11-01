@@ -12,22 +12,11 @@ file(DOWNLOAD
 file(DOWNLOAD
   "https://raw.githubusercontent.com/boost-ext/sml2/main/sml2"
   "${CMAKE_CURRENT_BINARY_DIR}/include/boost/sml.hpp"
-  EXPECTED_HASH SHA256=1112fbcbab738c013531313175f33e435945e52db632e41e75f4782838d79039
+  EXPECTED_HASH SHA256=1e46cd2574e0b99ff5a58bf80923ef42e238d933340494656054b3f761179291
 )
 
 add_executable(main "main.cpp")
 target_link_libraries(main PRIVATE fmt::fmt)
+target_include_directories(main PRIVATE "${CMAKE_CURRENT_BINARY_DIR}/include")
 target_compile_features(main PRIVATE cxx_std_20)
 target_compile_options(main PRIVATE ${warnings} ${wae})
-
-add_executable(sandbox-sml sml.cpp)
-target_link_libraries(sandbox-sml PRIVATE fmt::fmt)
-target_include_directories(sandbox-sml PRIVATE "${CMAKE_CURRENT_BINARY_DIR}/include")
-target_compile_features(sandbox-sml PUBLIC cxx_std_20)
-target_compile_options(sandbox-sml PRIVATE ${warnings} ${wae})
-
-add_executable(sandbox-entry-exit entry-exit.cpp)
-target_link_libraries(sandbox-entry-exit PRIVATE fmt::fmt)
-target_include_directories(sandbox-entry-exit PRIVATE "${CMAKE_CURRENT_BINARY_DIR}/include")
-target_compile_features(sandbox-entry-exit PRIVATE cxx_std_20)
-target_compile_options(sandbox-entry-exit PRIVATE ${warnings} ${wae})
