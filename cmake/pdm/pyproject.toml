@@ -1,0 +1,9 @@
+[project]
+name = "pdm"
+version = "0.1.0"
+description = ""
+authors = [{ name = "Uy Ha", email = "hchanuy@gmail.com" }]
+dependencies = []
+requires-python = ">=3.11"
+readme = "README.md"
+license = { text = "MIT" }
