@@ -89,3 +89,4 @@ add_snippet(timerfd)
 add_snippet(lambda)
 
 add_snippet(span_string_literal)
+add_snippet(customization)

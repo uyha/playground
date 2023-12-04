@@ -1,41 +1,23 @@
-main: () -> int = {
-    i := 42;
-    _ = i.ufcs();
-
-    j := fun();
-    _ = j.i.ufcs();
-
-    _ = fun().i.ufcs();
-
-    k := fun().i;
-    _ = k.ufcs();
-
-    _ = get_i(j).ufcs();
-
-    _ = get_i(fun()).ufcs();
-
-    res := (42).ufcs();
-
-    _ = (j.i).ufcs();
-
-    42.no_return();
+widget: @value type = {
+    val: int = 0;
+    operator=: (out this, i: int) = { val = i; }
 }
 
-no_return: (_) = { }
-
-ufcs: (i:int) -> int = {
-    return i+2;
+main: () = {
+    test<widget>();
+    std::cout << test.name << std::endl;
 }
 
-fun: () -> (i:int) = {
-    i = 42;
-    return;
-}
+test: <T> () = {
+    //  should be default constructible
+    a: T = ();
 
-get_i: (r:_) -> int = {
-    return r.i;
+    //  widget should be comparable
+    b: T = 2;
+    if (a<b) {
+        std::cout << "less ";
+    }
+    else {
+        std::cout << "more ";
+    }
 }
-
-//  And a test for non-local UFCS, which shouldn't do a [&] capture
-f: (_)->int = 0;
-y: int = 0.f();

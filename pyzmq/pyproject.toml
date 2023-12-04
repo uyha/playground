@@ -1,0 +1,17 @@
+[project]
+name = "sandbox"
+version = "0.0.1"
+description = ""
+authors = [{ name = "Uy Ha", email = "hchanuy@gmail.com" }]
+dependencies = ["pyzmq>=25.1.1"]
+requires-python = ">=3.11"
+readme = "README.md"
+license = { text = "MIT" }
+
+[tool.pdm.scripts]
+test = "pytest tests"
+
+[tool.pdm.dev-dependencies]
+test = [
+    "pytest>=7.4.3",
+]

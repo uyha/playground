@@ -1,0 +1,12 @@
+diff --git a/Ccache.cmake b/Ccache.cmake
+index 4b8de74..1753e3c 100644
+--- a/Ccache.cmake
++++ b/Ccache.cmake
+@@ -1,6 +1,6 @@
+ find_program(Ccache_EXECUTABLE ccache)
+ if(Ccache_EXECUTABLE)
+-  foreach(lang IN ITEMS C CXX OBJC OBJCXX CUDA)
++  foreach(lang IN ITEMS C CXX OBJC OBJCXX CUDA CXX)
+     set(CMAKE_${lang}_COMPILER_LAUNCHER "${Ccache_EXECUTABLE}" PARENT_SCOPE)
+   endforeach()
+ endif()
