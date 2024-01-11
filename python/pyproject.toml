@@ -6,8 +6,10 @@ authors = [{ name = "Uy Ha", email = "hchanuy@gmail.com" }]
 dependencies = [
     "Jinja2>=3.1.2",
     "tree-sitter>=0.20.2",
-    "disutils>=1.4.32.post2",
     "setuptools>=68.2.2",
+    "msgpack>=1.0.7",
+    "dacite>=1.8.1",
+    "pyserde[msgpack,toml]>=0.13.0",
 ]
 requires-python = ">=3.11"
 readme = "README.md"
