@@ -1,25 +1,14 @@
-import msgpack
-from dataclasses import dataclass
-import dataclasses
-from typing import Tuple
-import enum
+from serde.json import from_json, to_json
+from serde import serde, Strict
 
 
-@dataclass
-class MyObject:
-    b: Tuple[int]
-    a: int = 255
+@serde(type_check=Strict)
+class StrictString(str):
+    pass
 
 
-class ErrorCode(enum.IntEnum):
-    success = enum.auto()
+int_json = to_json(1)
+string_json = to_json("1")
 
-
-def encode(obj):
-    if dataclasses.is_dataclass(obj):
-        return dataclasses.astuple(obj)
-
-
-packer = msgpack.Packer(default=encode)
-print(a := packer.pack(MyObject((1,))))
-print(MyObject(*msgpack.unpackb(a)))
+print(f"{int_json=} {string_json=}")
+print(f"{from_json(StrictString, int_json)=} {from_json(StrictString, string_json)=}")
