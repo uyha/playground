@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+#shellcheck disable=SC2034
+SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+
+if [[ -n "${MAINTENANCE_FILE:-}" ]]; then
+  # This condition can't be merged with the above one since if `MAINTENANCE_FILE` is not
+  # defined, bash will error out
+  if [[ -f "$MAINTENANCE_FILE" ]]; then
+    while IFS="" read -r line || [[ -n "$line" ]]; do
+      echo "$line"
+    done <"$MAINTENANCE_FILE"
+  fi
+fi

@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
-while IFS="<newline>" read -r value; do
-  echo "$value"
-done < <(find . -type f)
+while read -r value; do
+  wc -c <<<"$value"
+done <<EOF
+  a aa aaa   
+EOF

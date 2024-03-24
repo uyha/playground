@@ -14,7 +14,7 @@
       "binaryDir": "${sourceDir}/build",
       "cacheVariables": {
         "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
-        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_BUILD_TYPE": "Release",
         "CPACK_GENERATOR": "DEB",
         "CMAKE_CXX_COMPILER": "g++-10",
         "CMAKE_CXX_STANDARD": "20",

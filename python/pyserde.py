@@ -6,5 +6,5 @@ from msgpack import packb
 
 
 time = datetime.fromisoformat("2020-01-01 00:00:00+00")
-print(to_msgpack(time, datetime=True))
+print(to_msgpack(time, reuse_instances=True, datetime=True))
 print(packb(time, datetime=True))

@@ -5,7 +5,7 @@
 groups = ["default"]
 strategy = ["cross_platform", "inherit_metadata"]
 lock_version = "4.4.1"
-content_hash = "sha256:170057304c9d7c929172df0f799314300c5fc0757487e18333822098dff16d7d"
+content_hash = "sha256:eec2f6d65008cbd70fc321ef55c3afc8da9268c6bab855a9dcd9d9bba5e91602"
 
 [[package]]
 name = "beartype"
@@ -147,7 +147,7 @@ files = [
 
 [[package]]
 name = "pyserde"
-version = "0.14.0"
+version = "0.15.0"
 requires_python = ">=3.8.0,<4.0.0"
 summary = "Yet another serialization library on top of dataclasses"
 groups = ["default"]
@@ -160,24 +160,24 @@ dependencies = [
     "typing-inspect>=0.4.0",
 ]
 files = [
-    {file = "pyserde-0.14.0-py3-none-any.whl", hash = "sha256:92e4e8a7090676494aa880e54c4a91a4a68ebb01c14f938bb6e44eb0127ea08a"},
-    {file = "pyserde-0.14.0.tar.gz", hash = "sha256:935efe8055abb48174935167d1a580c279d6ba60059fa1f2a3b76fdc4ea83dc9"},
+    {file = "pyserde-0.15.0-py3-none-any.whl", hash = "sha256:f013e86e307ac6ad310e27f2d85ca1d8eff33ff113fa1ec2f245de10a7c4219c"},
+    {file = "pyserde-0.15.0.tar.gz", hash = "sha256:c86b4b95a8a9e21aa87ccf92b1200cfef5d25dbd334d3b71d369cd31a20e3f54"},
 ]
 
 [[package]]
 name = "pyserde"
-version = "0.14.0"
+version = "0.15.0"
 extras = ["msgpack"]
 requires_python = ">=3.8.0,<4.0.0"
 summary = "Yet another serialization library on top of dataclasses"
 groups = ["default"]
 dependencies = [
     "msgpack",
-    "pyserde==0.14.0",
+    "pyserde==0.15.0",
 ]
 files = [
-    {file = "pyserde-0.14.0-py3-none-any.whl", hash = "sha256:92e4e8a7090676494aa880e54c4a91a4a68ebb01c14f938bb6e44eb0127ea08a"},
-    {file = "pyserde-0.14.0.tar.gz", hash = "sha256:935efe8055abb48174935167d1a580c279d6ba60059fa1f2a3b76fdc4ea83dc9"},
+    {file = "pyserde-0.15.0-py3-none-any.whl", hash = "sha256:f013e86e307ac6ad310e27f2d85ca1d8eff33ff113fa1ec2f245de10a7c4219c"},
+    {file = "pyserde-0.15.0.tar.gz", hash = "sha256:c86b4b95a8a9e21aa87ccf92b1200cfef5d25dbd334d3b71d369cd31a20e3f54"},
 ]
 
 [[package]]

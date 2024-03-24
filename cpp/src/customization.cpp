@@ -13,9 +13,9 @@ concept Serializable = std::is_constructible_v<Serializer<T>>
 
 template <>
 struct Serializer<int> {
-  auto operator()(int){};
+  auto operator()(int) {};
 };
 
 int main() {
-  static_assert(Serializable<double>);
+  static_assert(Serializable<int>);
 }

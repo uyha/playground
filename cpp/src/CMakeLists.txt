@@ -5,6 +5,8 @@ find_package(fmt REQUIRED)
 find_package(Threads)
 find_package(msgpack REQUIRED)
 find_package(lely-core REQUIRED)
+find_package(re2 REQUIRED)
+find_package(flatbuffers REQUIRED)
 
 function(add_snippet name)
   add_executable(${name} ${name}.cpp)
@@ -78,7 +80,7 @@ add_snippet(un)
 add_snippet(member_count)
 
 add_snippet(msgpack)
-target_link_libraries(msgpack PRIVATE msgpackc-cxx)
+target_link_libraries(msgpack PRIVATE msgpack-cxx)
 
 add_snippet(lely-core)
 target_link_libraries(lely-core PRIVATE lely-core::lely-core)
@@ -90,3 +92,9 @@ add_snippet(lambda)
 
 add_snippet(span_string_literal)
 add_snippet(customization)
+
+add_snippet(re)
+target_link_libraries(re PRIVATE re2::re2)
+
+add_snippet(flatbuffers)
+target_link_libraries(flatbuffers PRIVATE flatbuffers::flatbuffers)

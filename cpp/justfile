@@ -1,5 +1,5 @@
-build:
-  cmake --build build -j$(halfproc)
+build *ARGS:
+  cmake --build build -j$(halfproc) "$@"
 
-config:
-  cmake --preset default
+config *ARGS:
+  cmake --preset default "$@"
