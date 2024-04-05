@@ -1,9 +1,16 @@
 const std = @import("std");
 const print = std.debug.print;
 
-fn aFunction() void {}
+const Shape = union(enum) {
+    rectangle: struct { width: u8, height: u8 },
+    triangle: struct { base: u8, height: u8 },
+};
 
 pub fn main() !void {
-    comptime var fn_type = @typeInfo(@TypeOf([_]i32{}));
-    print("{any}", .{fn_type.Array});
+    const info = @typeInfo(Shape);
+    const tag_info = @typeInfo(info.Union.tag_type.?);
+    print("{?}\n", .{tag_info.Enum.tag_type});
+    inline for (@typeInfo(Shape).Union.fields) |field| {
+        print("{s}\n", .{field.name});
+    }
 }

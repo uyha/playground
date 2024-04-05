@@ -13,6 +13,8 @@
       "hidden": true,
       "binaryDir": "${sourceDir}/cmake-build-${presetName}",
       "cacheVariables": {
+        "CMAKE_C_COMPILER": "gcc-10",
+        "CMAKE_CXX_COMPILER": "g++-10",
         "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
         "USE_CONAN": "ON",
         "CONAN_PROFILE_HOST": "${sourceDir}/data/conan/x86_64.conf",
