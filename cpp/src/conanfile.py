@@ -12,3 +12,5 @@ class SandboxRecipe(ConanFile):
         self.requires("lely-core/2.3.2")
         self.requires("re2/20231101")
         self.requires("flatbuffers/23.5.26")
+        self.requires("pfr/2.2.0")
+        self.requires("nlohmann_json/3.11.3")

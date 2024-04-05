@@ -35,8 +35,13 @@ auto read_fn(std::string const &s) -> std::optional<std::variant<T1, T2, Ts...>>
   return read_fn<T2, Ts...>(s);
 }
 
+template <typename... Ts, typename... TTs>
+auto var_fn(Ts..., bool = true, TTs...)
+  requires((not std::is_same_v<Ts, bool>) && ...)
+{
+  fmt::print("{}\n", __PRETTY_FUNCTION__);
+}
+
 int main() {
-  [[maybe_unused]] auto const result = read_fn<int, float>("float");
-  assert(result);
-  assert(std::holds_alternative<float>(*result));
+  var_fn(1, 2, 3, 4.0);
 }

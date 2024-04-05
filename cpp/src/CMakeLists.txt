@@ -7,12 +7,21 @@ find_package(msgpack REQUIRED)
 find_package(lely-core REQUIRED)
 find_package(re2 REQUIRED)
 find_package(flatbuffers REQUIRED)
+find_package(pfr REQUIRED)
+find_package(nlohmann_json REQUIRED)
+
+file(DOWNLOAD
+  "https://raw.githubusercontent.com/uyha/fn/v0.5/src/river/fn.hpp"
+  "${CMAKE_CURRENT_BINARY_DIR}/external/river/fn.hpp"
+  EXPECTED_HASH SHA256=a0f7f00670c08539191cf39bdf6f45894fd9b242fe3c9a337cf48267f403e881
+)
 
 function(add_snippet name)
   add_executable(${name} ${name}.cpp)
   target_link_libraries(${name} PRIVATE fmt::fmt)
   target_compile_features(${name} PRIVATE cxx_std_20)
   target_compile_options(${name} PRIVATE ${warnings} ${wae})
+  target_include_directories(${name} PRIVATE "${CMAKE_CURRENT_BINARY_DIR}/external")
 endfunction()
 
 add_snippet(conditional_variable)
@@ -98,3 +107,10 @@ target_link_libraries(re PRIVATE re2::re2)
 
 add_snippet(flatbuffers)
 target_link_libraries(flatbuffers PRIVATE flatbuffers::flatbuffers)
+
+add_snippet(variant)
+
+add_snippet(fn)
+
+add_snippet(megameta)
+target_link_libraries(megameta PRIVATE pfr::pfr nlohmann_json::nlohmann_json)

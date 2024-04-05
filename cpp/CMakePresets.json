@@ -10,13 +10,13 @@
       "name": "default",
       "displayName": "Default Config",
       "description": "Default build using Ninja generator",
-      "generator": "Unix Makefiles",
+      "generator": "Ninja",
       "binaryDir": "${sourceDir}/build",
       "cacheVariables": {
         "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
         "CMAKE_BUILD_TYPE": "Release",
         "CPACK_GENERATOR": "DEB",
-        "CMAKE_CXX_COMPILER": "g++-10",
+        "CMAKE_CXX_COMPILER": "g++-11",
         "CMAKE_CXX_STANDARD": "20",
         "CONAN_PROFILE_HOST": "${sourceDir}/data/conan/x86_64.conf"
       },
