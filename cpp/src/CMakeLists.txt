@@ -114,3 +114,5 @@ add_snippet(fn)
 
 add_snippet(megameta)
 target_link_libraries(megameta PRIVATE pfr::pfr nlohmann_json::nlohmann_json)
+
+add_snippet(arrow_star)
