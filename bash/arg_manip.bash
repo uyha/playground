@@ -6,11 +6,9 @@ set -euo pipefail
 SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
 echo "$@"
-echo "$#"
+echo "$1"
 
-current=-"${1:2}"
-shift 1
-set -- "$current" "$@"
+set -- "-${1:1}" "${@:2}"
 
 echo "$@"
-echo "$#"
+echo "$1"
