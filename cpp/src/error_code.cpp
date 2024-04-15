@@ -30,6 +30,8 @@ auto make_error_code(lpipp::SomeStruct::SomeEnum) -> std::error_code {
 }
 } // namespace lpipp
 
+static_assert(sizeof(std::error_category) == 8);
+
 int main() {
   std::error_code err = (lpipp::SomeStruct::SomeEnum)(1);
   fmt::print("{}\n", err.message());
