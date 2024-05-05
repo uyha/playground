@@ -10,12 +10,13 @@ class ProjectName(ConanFile):
 
     def configure(self):
         assert self.options is not None
-        self.options["sol2/*"].with_lua = "luajit"
+        self.options["sol2/*"].with_lua = "lua"
 
     def requirements(self):
         dependencies = [
             "fmt/10.1.1",
-            "luajit/2.1.0-beta3",
+            # "luajit/2.1.0-beta3",
+            "lua/5.4.6",
             "sol2/3.3.1",
         ]
 

@@ -1,15 +1,8 @@
-local callback = FnMap.new()
-
-local function create()
-	local var = 0
-	---@param demo Demo
-	local result = function(demo)
-		var = var + 1
-		print(demo.a, var)
+function fn()
+	for i = 1, 10, 1 do
+		local lifetime <close> = Lifetime.new()
 	end
-
-	return result
 end
 
-callback.print = create()
-return callback
+local lifetime = Lifetime.new()
+fn()
