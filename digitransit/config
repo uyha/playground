@@ -1,0 +1,8 @@
+request = "GET"
+url = "https://api.digitransit.fi/geocoding/v1/search"
+url-query = "text=rautatientori"
+url-query = "size=1"
+
+header = "digitransit-subscription-key: 84fcf9b63fba4b27b346918c7b737189"
+
+silent
