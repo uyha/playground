@@ -13,3 +13,8 @@ add_executable(push-pull "push-pull.cpp")
 target_link_libraries(push-pull PRIVATE fmt::fmt cppzmq)
 target_compile_features(push-pull PRIVATE cxx_std_20)
 target_compile_options(push-pull PRIVATE ${warnings} ${wae})
+
+add_executable(barebone "barebone.cpp")
+target_link_libraries(barebone PRIVATE cppzmq)
+target_compile_features(barebone PRIVATE cxx_std_20)
+target_compile_options(barebone PRIVATE ${warnings} ${wae})

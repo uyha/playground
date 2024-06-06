@@ -14,3 +14,4 @@ class SandboxRecipe(ConanFile):
         self.requires("flatbuffers/23.5.26")
         self.requires("pfr/2.2.0")
         self.requires("nlohmann_json/3.11.3")
+        self.requires("inja/3.4.0")

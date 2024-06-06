@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+cansend can0 63C#2F.A0.22.00.04.00.00.00
+sleep 1
+cansend can0 63C#2F.A0.22.00.00.00.00.00
+sleep 0.1

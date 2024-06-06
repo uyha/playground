@@ -9,6 +9,7 @@ find_package(re2 REQUIRED)
 find_package(flatbuffers REQUIRED)
 find_package(pfr REQUIRED)
 find_package(nlohmann_json REQUIRED)
+find_package(inja REQUIRED)
 
 file(DOWNLOAD
   "https://raw.githubusercontent.com/uyha/fn/v0.5/src/river/fn.hpp"
@@ -117,3 +118,10 @@ target_link_libraries(megameta PRIVATE pfr::pfr nlohmann_json::nlohmann_json)
 
 add_snippet(arrow_star)
 add_snippet(virtual_no_allocate)
+
+add_snippet(inja)
+target_link_libraries(inja PRIVATE pantor::inja)
+target_precompile_headers(inja PRIVATE
+  [[<fmt/core.h>]]
+  [[<inja/inja.hpp>]]
+)
