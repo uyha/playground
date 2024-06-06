@@ -1,0 +1,13 @@
+[project]
+name = "vendor-list"
+version = "0.1.0"
+description = "Default template for PDM package"
+authors = [{ name = "Uy Ha", email = "hchanuy@gmail.com" }]
+dependencies = ["lxml>=5.2.2", "beautifulsoup4>=4.12.3"]
+requires-python = "==3.12.*"
+readme = "README.md"
+license = { text = "MIT" }
+
+
+[tool.pdm]
+distribution = false
