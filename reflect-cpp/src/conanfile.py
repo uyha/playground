@@ -8,11 +8,16 @@ class ProjectName(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
     generators = "CMakeDeps"
 
+    def configure(self):
+        assert self.options is not None
+        self.options["reflect-cpp/*"].with_json = True
+        self.options["msgpack-cxx/*"].use_boost = False
+
     def requirements(self):
         dependencies = [
             "fmt/10.2.1",
-            "pfr/2.2.0",
-            "nlohmann_json/3.11.3",
+            "reflect-cpp/0.10.0",
+            "msgpack-cxx/6.1.1",
         ]
 
         for dep in dependencies:
