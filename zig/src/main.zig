@@ -34,13 +34,26 @@ fn TypeList(current: anytype) type {
     };
 }
 
-pub fn main() !void {
-    comptime var list = TypeList(.{});
-    comptime {
-        list = list.append(u8).append(u16);
-    }
+fn isEven(ptr: *const u32) bool {
+    return @rem(ptr.*, 2) == 0;
+}
 
-    inline for (0.., list.types) |i, t| {
-        std.debug.print("{} {}\n", .{ i, t });
-    }
+fn flip(ptr: *u32) void {
+    ptr.* ^= 1;
+}
+
+fn giveMeRaw(any: anytype) void {
+    _ = any;
+}
+
+const A = struct {
+    pub fn a(_: @This()) void {}
+};
+
+fn a(_: A) void {}
+
+pub fn main() !void {
+    std.debug.print("{}\n", .{@typeInfo(@TypeOf(giveMeRaw)).Fn.params[0].is_generic});
+    const c = A{};
+    A.a(c);
 }
