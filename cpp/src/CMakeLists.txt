@@ -1,5 +1,5 @@
-include(CompileOptions)
 include(Conan)
+include(CompileOptions)
 
 find_package(fmt REQUIRED)
 find_package(Threads)
@@ -125,3 +125,10 @@ target_precompile_headers(inja PRIVATE
   [[<fmt/core.h>]]
   [[<inja/inja.hpp>]]
 )
+
+add_snippet(threaded_inf_loop)
+target_link_libraries(threaded_inf_loop PRIVATE Threads::Threads)
+
+add_snippet(suicide)
+target_compile_options(suicide PRIVATE -fsanitize=address)
+target_link_options(suicide PRIVATE -fsanitize=address)
