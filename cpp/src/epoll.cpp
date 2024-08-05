@@ -1,30 +1,41 @@
 #include <cerrno>
 #include <cstdio>
 #include <fcntl.h>
-#include <fmt/printf.h>
+#include <fmt/ranges.h>
+#include <span>
 #include <sys/epoll.h>
 #include <unistd.h>
 
 int main() {
-  auto event  = ::epoll_event{};
-  auto epoll  = ::epoll_create1(0);
-  auto epoll1 = ::epoll_create1(0);
-  {
-    auto const error = ::epoll_ctl(epoll, EPOLL_CTL_ADD, epoll1, &event);
-    fmt::print("{} {}\n", error, errno == 0);
-  }
+  auto event = ::epoll_event{
+      .events = EPOLLIN,
+      .data   = {.fd = STDIN_FILENO},
+  };
 
-  {
-    auto const error = ::epoll_ctl(epoll1, EPOLL_CTL_ADD, epoll, &event);
-    fmt::print("{} {}\n", error, errno == ELOOP);
-  }
+  auto epoll = ::epoll_create1(0);
+  ::epoll_ctl(epoll, EPOLL_CTL_ADD, STDIN_FILENO, &event);
 
-  {
-    auto dir         = ::open(".", O_DIRECTORY);
-    auto const error = ::epoll_ctl(epoll, EPOLL_CTL_ADD, dir, &event);
+  auto events = std::array<::epoll_event, 1>{};
+  auto buffer = std::array<char, 256>{};
 
-    fmt::print("{} {}\n", error, errno == EPERM);
+  while (true) {
+    fmt::print("{}:{}\n", __FILE__, __LINE__);
+    (void)::fflush(::stdout);
+    auto const count = ::epoll_wait(epoll, events.data(), events.size(), -1);
+    (void)count;
+    auto const bytes_read = read(STDIN_FILENO, buffer.data(), buffer.size());
 
-    ::close(dir);
+    if (bytes_read <= 0) {
+      break;
+    }
+
+    fmt::print("{}",
+               fmt::join(
+                   std::span{
+                       buffer.begin(),
+                       static_cast<decltype(buffer)::size_type>(bytes_read),
+                   },
+                   ""));
+    (void)::fflush(::stdout);
   }
 }

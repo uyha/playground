@@ -132,3 +132,6 @@ target_link_libraries(threaded_inf_loop PRIVATE Threads::Threads)
 add_snippet(suicide)
 target_compile_options(suicide PRIVATE -fsanitize=address)
 target_link_options(suicide PRIVATE -fsanitize=address)
+
+add_snippet(fork)
+target_link_libraries(fork PRIVATE Threads::Threads)
