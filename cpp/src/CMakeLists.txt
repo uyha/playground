@@ -10,6 +10,7 @@ find_package(flatbuffers REQUIRED)
 find_package(pfr REQUIRED)
 find_package(nlohmann_json REQUIRED)
 find_package(inja REQUIRED)
+find_package(cppzmq REQUIRED)
 
 file(DOWNLOAD
   "https://raw.githubusercontent.com/uyha/fn/v0.5/src/river/fn.hpp"
@@ -135,3 +136,6 @@ target_link_options(suicide PRIVATE -fsanitize=address)
 
 add_snippet(fork)
 target_link_libraries(fork PRIVATE Threads::Threads)
+
+add_snippet(json)
+target_link_libraries(json PRIVATE nlohmann_json::nlohmann_json)
