@@ -3,6 +3,8 @@
 #include <nlohmann/json.hpp>
 #include <variant>
 
+enum class Tenth {};
+
 struct Wah {
   int wah;
 };
@@ -17,6 +19,7 @@ struct Sup {
   int seventh;
   int eight;
   int nineth;
+  Tenth tenth;
 };
 
 template <typename T, typename TIndexSequence>
@@ -95,6 +98,16 @@ struct formatter<Wah> {
   }
 };
 template <>
+struct formatter<Tenth> {
+  template <typename Context>
+  constexpr auto parse(Context &context) -> decltype(context.begin()) {
+    return context.begin();
+  }
+  auto format(Tenth const &value, format_context &context) const -> decltype(context.out()) {
+    return fmt::format_to(context.out(), "{}", static_cast<int>(value));
+  }
+};
+template <>
 struct formatter<Sup> {
   template <typename Context>
   constexpr auto parse(Context &context) -> decltype(context.begin()) {
@@ -120,7 +133,8 @@ int main() {
   using Event = convert_to_t<Sup, std::variant>;
   auto event  = Event{std::in_place_index<8>, 1};
 
-  auto state = Sup{};
+  auto state  = Sup{};
+  state.tenth = static_cast<Tenth>(100);
 
   fmt::print("{}\n", state);
   constexpr auto update = update_for<Sup>();
