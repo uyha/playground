@@ -139,3 +139,6 @@ target_link_libraries(fork PRIVATE Threads::Threads)
 
 add_snippet(json)
 target_link_libraries(json PRIVATE nlohmann_json::nlohmann_json)
+
+add_snippet(metastruct)
+target_link_libraries(metastruct PRIVATE pfr::pfr)
