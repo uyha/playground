@@ -142,3 +142,5 @@ target_link_libraries(json PRIVATE nlohmann_json::nlohmann_json)
 
 add_snippet(metastruct)
 target_link_libraries(metastruct PRIVATE pfr::pfr)
+
+add_snippet(function)
