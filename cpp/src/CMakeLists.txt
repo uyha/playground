@@ -144,3 +144,6 @@ add_snippet(metastruct)
 target_link_libraries(metastruct PRIVATE pfr::pfr)
 
 add_snippet(function)
+
+add_snippet(member_ptr)
+target_link_libraries(member_ptr PRIVATE pfr::pfr)
