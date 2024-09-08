@@ -37,8 +37,8 @@ auto canceling() -> void {
 
   auto timer = ::timerfd_create(CLOCK_MONOTONIC, 0);
   auto spec  = ::itimerspec{
-       .it_interval = {.tv_sec = 0, .tv_nsec = 0},
-       .it_value    = {.tv_sec = 3, .tv_nsec = 0},
+       .it_interval = {.tv_sec = 0, .tv_nsec = 500'000'000},
+       .it_value    = {.tv_sec = 0, .tv_nsec = 500'000'000},
   };
 
   [[maybe_unused]] auto const cancel = ::itimerspec{
@@ -58,7 +58,7 @@ auto canceling() -> void {
 
   auto ready_to_read = 0;
   while (true) {
-    fmt::print("{}:{} {}\n", __FILE__, __LINE__, ready_to_read = ::poll(&fd, 1, 1000));
+    fmt::print("{}:{} {}\n", __FILE__, __LINE__, ready_to_read = ::poll(&fd, 1, -1));
 
     // Comment out to stop cancelling
     ::timerfd_settime(timer, 0, &cancel, nullptr);
@@ -70,6 +70,6 @@ auto canceling() -> void {
 }
 
 int main() {
-  basic();
-  // canceling();
+  // basic();
+  canceling();
 }
