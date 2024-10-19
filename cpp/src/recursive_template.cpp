@@ -11,6 +11,6 @@ struct Spec {
 };
 
 int main() {
-  static_assert(std::is_same_v<Spec::A::B, int>);
+  static_assert(std::is_same_v<Spec::A::B, float>);
   return 0;
 }

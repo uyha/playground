@@ -149,3 +149,4 @@ add_snippet(member_ptr)
 target_link_libraries(member_ptr PRIVATE pfr::pfr)
 
 add_snippet(recursive_template)
+add_snippet(constructor)
