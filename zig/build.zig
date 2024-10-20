@@ -77,4 +77,5 @@ pub fn build(b: *std.Build) void {
 
     addPlayground(allocator, b, "tagged_union", options);
     addPlayground(allocator, b, "sentinel", options);
+    addPlayground(allocator, b, "distinct", options);
 }
