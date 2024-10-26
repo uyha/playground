@@ -1,26 +1,14 @@
 const std = @import("std");
 
-pub fn build(b: *std.Build) void {
+pub fn build(b: *std.Build) !void {
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{});
 
-    var zig_cc_builder = std.ArrayList(u8).init(b.allocator);
-    defer zig_cc_builder.deinit();
-    std.fmt.format(zig_cc_builder.writer(), "{s} cc", .{b.graph.zig_exe}) catch {};
-    const zig_cc = zig_cc_builder.items;
-
-    var zig_cxx_builder = std.ArrayList(u8).init(b.allocator);
-    defer zig_cxx_builder.deinit();
-    std.fmt.format(zig_cxx_builder.writer(), "{s} c++", .{b.graph.zig_exe}) catch {};
-    const zig_cxx = zig_cxx_builder.items;
-
-    const cmake = b.addSystemCommand(&[_][]const u8{ "echo", zig_cc, zig_cxx });
-    const cmake_step = b.step("cmake", "Invoke cmake");
-    cmake_step.dependOn(&cmake.step);
-
-    if (b.args) |args| {
-        cmake.addArgs(args);
-    }
+    const zmq = b.dependency(
+        "zmq",
+        .{ .target = target, .optimize = optimize },
+    );
+    const zmq_module = zmq.module("libzmq");
 
     const exe = b.addExecutable(.{
         .name = "some",
@@ -28,5 +16,12 @@ pub fn build(b: *std.Build) void {
         .target = target,
         .optimize = optimize,
     });
+    exe.root_module.addImport("zmq", zmq_module);
     b.installArtifact(exe);
+
+    const run_exe = b.addRunArtifact(exe);
+    run_exe.step.dependOn(b.getInstallStep());
+
+    const run_step = b.step("run", "");
+    run_step.dependOn(&run_exe.step);
 }

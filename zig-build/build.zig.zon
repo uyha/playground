@@ -1,0 +1,17 @@
+.{
+    .name = "zig-build",
+
+    .version = "0.0.0",
+
+    .dependencies = .{
+        .zmq = .{
+            .url = "/home/uy/Personal/zmq",
+            .hash = "1220b9ac12dbc6bde6a9075c170422b422463dd5e3a589b06d66e246f9f02d6549d7",
+        },
+    },
+    .paths = .{
+        "build.zig",
+        "build.zig.zon",
+        "src",
+    },
+}
