@@ -2,39 +2,61 @@
 #include <memory>
 #include <river/fn.hpp>
 
-struct A {
-  A()                         = default;
-  A(A &&)                     = delete;
-  auto operator=(A &&) -> A & = delete;
-  virtual auto act1() -> void = 0;
-
-  virtual ~A() = default;
-};
-
-struct B : A {
-  B(int a_)
-      : a{a_} {}
-
-  auto act1() -> void override {
-    fmt::print("B: {{a: {}}}\n", a);
+class LLDriver {
+public:
+  LLDriver(int) {
+    fmt::print("{}:{}\n", __FILE__, __LINE__);
+    (void)::fflush(::stdout);
   }
 
-  int a;
+  LLDriver(LLDriver const &)                     = delete;
+  auto operator=(LLDriver const &) -> LLDriver & = delete;
+
+  LLDriver(LLDriver &&)                     = delete;
+  auto operator=(LLDriver &&) -> LLDriver & = delete;
+
+  virtual ~LLDriver() = default;
+
+  virtual auto check_this() -> void = 0;
 };
 
-struct C : A {
-  auto act1() -> void override {
-    fmt::print("C\n");
+class VersionedLLDriver : public virtual LLDriver {
+public:
+  VersionedLLDriver()
+      : LLDriver(0) {
+    fmt::print("{}:{}\n", __FILE__, __LINE__);
+    (void)::fflush(::stdout);
+  }
+
+  auto check_this() -> void override final {
+    fmt::print("Checking this\n");
+  }
+};
+
+class Driver : public virtual LLDriver {
+public:
+  virtual auto do_this() -> void = 0;
+};
+
+class ConcreteDriver
+    : public Driver
+    , public VersionedLLDriver {
+public:
+  ConcreteDriver()
+      : LLDriver(0)
+      , Driver{}
+      , VersionedLLDriver{} {
+    fmt::print("{}:{}\n", __FILE__, __LINE__);
+    (void)::fflush(::stdout);
+  }
+
+  auto do_this() -> void override {
+    fmt::print("Doing this\n");
   }
 };
 
 int main() {
-  auto fun             = river::fn<&A::act1>{};
-  std::unique_ptr<A> b = std::make_unique<B>(1);
-  std::unique_ptr<A> c = std::make_unique<C>();
-  A *ref               = b.get();
-
-  fun(*ref);
-  c = std::make_unique<B>(1);
-  fun(*c);
+  std::unique_ptr<Driver> b = std::make_unique<ConcreteDriver>();
+  b->check_this();
+  b->do_this();
 }
