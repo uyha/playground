@@ -14,7 +14,7 @@ class ProjectName(ConanFile):
 
     def requirements(self):
         dependencies = [
-            "fmt/10.1.1",
+            "fmt/11.0.2",
             "cppzmq/4.10.0",
         ]
 
