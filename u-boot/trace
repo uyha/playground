@@ -1,0 +1,25 @@
+usb start
+if usb dev 0; then
+  devtype=usb
+  part list usb 0 -bootable devplist
+  env exists devplist || setenv devplist 1
+  if fstype usb 0:1 bootfstype; then
+    part uuid usb 0:1 distro_bootpart_uuid
+    echo Scanning usb 0:1...
+    echo Found U-Boot script /boot/boot.scr
+    load usb 0:1 ${scriptaddr} /boot/boot.scr
+    source ${scriptaddr}
+    echo SCRIPT FAILED: continuing...
+  fi
+fi
+
+devtype=usb
+devnum=0
+env set distro_bootpart 1
+run usb_boot
+
+usb start
+load usb 0:1 ${loadaddr} /boot/fitImage
+part uuid usb 0:1 uuid
+env set bootargs "console=ttymxc0,115200 root=PARTUUID=${uuid} rw rootwait consolebank=0"
+bootm
