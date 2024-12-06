@@ -13,13 +13,7 @@ if usb dev 0; then
   fi
 fi
 
-devtype=usb
-devnum=0
-env set distro_bootpart 1
+devtype=usb; devnum=0; env set distro_bootpart 1
 run usb_boot
 
-usb start
-load usb 0:1 ${loadaddr} /boot/fitImage
-part uuid usb 0:1 uuid
-env set bootargs "console=ttymxc0,115200 root=PARTUUID=${uuid} rw rootwait consolebank=0"
-bootm
+usb start; load usb 0:1 ${loadaddr} /boot/fitImage; part uuid usb 0:1 uuid; env set bootargs "console=ttymxc0,115200 root=PARTUUID=${uuid} rw rootwait consolebank=0"; bootm

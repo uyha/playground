@@ -11,7 +11,7 @@ const B = packed struct {
 
 const C = blk: {
     var a_info = @typeInfo(A);
-    a_info.Struct.decls.len = 0;
+    a_info.@"struct".decls.len = 0;
     break :blk @Type(a_info);
 };
 
