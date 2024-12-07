@@ -1,7 +1,7 @@
 const std = @import("std");
 
 const ExecutableOptions = blk: {
-    const OptionsStruct = @typeInfo(std.Build.ExecutableOptions).@"struct";
+    const OptionsStruct = @typeInfo(std.Build.ExecutableOptions).Struct;
 
     var fields: [OptionsStruct.fields.len]std.builtin.Type.StructField = undefined;
 
@@ -16,7 +16,7 @@ const ExecutableOptions = blk: {
     }
 
     break :blk @Type(.{
-        .@"struct" = .{
+        .Struct = .{
             .layout = .auto,
             .fields = fields[0..index],
             .decls = &[_]std.builtin.Type.Declaration{},
@@ -42,12 +42,11 @@ fn executableOptions(
 }
 
 fn addPlayground(
-    allocator: std.mem.Allocator,
     b: *std.Build,
     name: []const u8,
     options: ExecutableOptions,
 ) void {
-    var buffer = std.ArrayList(u8).init(allocator);
+    var buffer = std.ArrayList(u8).init(b.allocator);
     defer buffer.deinit();
 
     std.fmt.format(buffer.writer(), "src/{s}.zig", .{name}) catch unreachable;
@@ -73,10 +72,9 @@ pub fn build(b: *std.Build) void {
 
     const options: ExecutableOptions = .{ .target = target, .optimize = optimize };
 
-    const allocator = std.heap.page_allocator;
-
-    addPlayground(allocator, b, "tagged_union", options);
-    addPlayground(allocator, b, "sentinel", options);
-    addPlayground(allocator, b, "distinct", options);
-    addPlayground(allocator, b, "use_shared_var", options);
+    addPlayground(b, "tagged_union", options);
+    addPlayground(b, "sentinel", options);
+    addPlayground(b, "distinct", options);
+    addPlayground(b, "use_shared_var", options);
+    addPlayground(b, "arena_usage", options);
 }
