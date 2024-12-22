@@ -77,4 +77,5 @@ pub fn build(b: *std.Build) void {
     addPlayground(b, "distinct", options);
     addPlayground(b, "use_shared_var", options);
     addPlayground(b, "arena_usage", options);
+    addPlayground(b, "lambda", options);
 }
