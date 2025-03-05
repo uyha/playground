@@ -1,7 +1,7 @@
 const std = @import("std");
 
 const ExecutableOptions = blk: {
-    const OptionsStruct = @typeInfo(std.Build.ExecutableOptions).Struct;
+    const OptionsStruct = @typeInfo(std.Build.ExecutableOptions).@"struct";
 
     var fields: [OptionsStruct.fields.len]std.builtin.Type.StructField = undefined;
 
@@ -16,7 +16,7 @@ const ExecutableOptions = blk: {
     }
 
     break :blk @Type(.{
-        .Struct = .{
+        .@"struct" = .{
             .layout = .auto,
             .fields = fields[0..index],
             .decls = &[_]std.builtin.Type.Declaration{},
@@ -78,4 +78,5 @@ pub fn build(b: *std.Build) void {
     addPlayground(b, "use_shared_var", options);
     addPlayground(b, "arena_usage", options);
     addPlayground(b, "lambda", options);
+    addPlayground(b, "slice", options);
 }
