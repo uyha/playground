@@ -152,3 +152,5 @@ add_snippet(recursive_template)
 add_snippet(constructor)
 add_snippet(virtual)
 target_sources(virtual PRIVATE virtual-dummy.cpp)
+
+add_snippet(inotify)

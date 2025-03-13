@@ -1,5 +1,4 @@
 from conan import ConanFile
-from conans.model.requires import Requirements
 
 
 class SandboxRecipe(ConanFile):
