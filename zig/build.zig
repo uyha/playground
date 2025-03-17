@@ -79,4 +79,6 @@ pub fn build(b: *std.Build) void {
     addPlayground(b, "arena_usage", options);
     addPlayground(b, "lambda", options);
     addPlayground(b, "slice", options);
+    addPlayground(b, "swap", options);
+    addPlayground(b, "struct", options);
 }
