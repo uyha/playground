@@ -81,4 +81,5 @@ pub fn build(b: *std.Build) void {
     addPlayground(b, "slice", options);
     addPlayground(b, "swap", options);
     addPlayground(b, "struct", options);
+    addPlayground(b, "fanotify", options);
 }

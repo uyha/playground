@@ -154,3 +154,4 @@ add_snippet(virtual)
 target_sources(virtual PRIVATE virtual-dummy.cpp)
 
 add_snippet(inotify)
+add_snippet(fanotify)
