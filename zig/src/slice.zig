@@ -10,4 +10,13 @@ pub fn main() void {
     std.debug.print("{any}\n", .{b});
     mod(&b);
     std.debug.print("{any}\n", .{b});
+
+    const c = comptime c: {
+        const d = [_]u8{ 1, 2, 3, 4, 5, 6 };
+        var c: []const u8 = &d;
+        c = c ++ c;
+        break :c c;
+    };
+
+    std.debug.print("{any}\n", .{c});
 }
