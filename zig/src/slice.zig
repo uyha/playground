@@ -19,4 +19,9 @@ pub fn main() void {
     };
 
     std.debug.print("{any}\n", .{c});
+
+    const str: [2:0]u8 = .{ 1, 2 };
+    const slice: []const u8 = &str;
+    std.debug.print("{any}\n", .{str});
+    std.debug.print("{any}\n", .{slice});
 }

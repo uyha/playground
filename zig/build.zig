@@ -45,7 +45,7 @@ fn addPlayground(
     b: *std.Build,
     name: []const u8,
     options: ExecutableOptions,
-) void {
+) *std.Build.Step.Compile {
     var buffer = std.ArrayList(u8).init(b.allocator);
     defer buffer.deinit();
 
@@ -64,6 +64,8 @@ fn addPlayground(
 
     const run_step = b.step(name, "");
     run_step.dependOn(&run_cmd.step);
+
+    return exe;
 }
 
 pub fn build(b: *std.Build) void {
@@ -72,14 +74,20 @@ pub fn build(b: *std.Build) void {
 
     const options: ExecutableOptions = .{ .target = target, .optimize = optimize };
 
-    addPlayground(b, "tagged_union", options);
-    addPlayground(b, "sentinel", options);
-    addPlayground(b, "distinct", options);
-    addPlayground(b, "use_shared_var", options);
-    addPlayground(b, "arena_usage", options);
-    addPlayground(b, "lambda", options);
-    addPlayground(b, "slice", options);
-    addPlayground(b, "swap", options);
-    addPlayground(b, "struct", options);
-    addPlayground(b, "fanotify", options);
+    _ = addPlayground(b, "tagged_union", options);
+    _ = addPlayground(b, "sentinel", options);
+    _ = addPlayground(b, "distinct", options);
+    _ = addPlayground(b, "use_shared_var", options);
+    _ = addPlayground(b, "arena_usage", options);
+    _ = addPlayground(b, "lambda", options);
+    _ = addPlayground(b, "slice", options);
+    _ = addPlayground(b, "swap", options);
+    _ = addPlayground(b, "struct", options);
+    _ = addPlayground(b, "fanotify", options);
+    const zeromq = addPlayground(b, "zeromq", options);
+    const zimq = b.dependency("zimq", .{
+        .target = target,
+        .optimize = optimize,
+    });
+    zeromq.root_module.addImport("zimq", zimq.module("zimq"));
 }
