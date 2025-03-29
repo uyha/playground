@@ -90,4 +90,11 @@ pub fn build(b: *std.Build) void {
         .optimize = optimize,
     });
     zeromq.root_module.addImport("zimq", zimq.module("zimq"));
+
+    const message_pack = addPlayground(b, "message_pack", options);
+    const mzg = b.dependency("mzg", .{
+        .target = target,
+        .optimize = optimize,
+    });
+    message_pack.root_module.addImport("mzg", mzg.module("mzg"));
 }
