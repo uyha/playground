@@ -74,16 +74,19 @@ pub fn build(b: *std.Build) void {
 
     const options: ExecutableOptions = .{ .target = target, .optimize = optimize };
 
-    _ = addPlayground(b, "tagged_union", options);
-    _ = addPlayground(b, "sentinel", options);
-    _ = addPlayground(b, "distinct", options);
-    _ = addPlayground(b, "use_shared_var", options);
     _ = addPlayground(b, "arena_usage", options);
-    _ = addPlayground(b, "lambda", options);
-    _ = addPlayground(b, "slice", options);
-    _ = addPlayground(b, "swap", options);
-    _ = addPlayground(b, "struct", options);
+    _ = addPlayground(b, "distinct", options);
     _ = addPlayground(b, "fanotify", options);
+    _ = addPlayground(b, "lambda", options);
+    _ = addPlayground(b, "packed", options);
+    _ = addPlayground(b, "plus", options);
+    _ = addPlayground(b, "sentinel", options);
+    _ = addPlayground(b, "slice", options);
+    _ = addPlayground(b, "struct", options);
+    _ = addPlayground(b, "swap", options);
+    _ = addPlayground(b, "tagged_union", options);
+    _ = addPlayground(b, "use_shared_var", options);
+
     const zeromq = addPlayground(b, "zeromq", options);
     const zimq = b.dependency("zimq", .{
         .target = target,

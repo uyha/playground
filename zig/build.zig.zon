@@ -41,8 +41,8 @@
             .hash = "zimq-0.0.0-nw1ioBxbAQD_56X_UNGDqA88s2qlrfOC-V5sR2w7ezcg",
         },
         .mzg = .{
-            .url = "git+https://github.com/uyha/mzg.git?ref=v0.0.2#676c7fd13b4a6454da67409a1cee969f46ac0451",
-            .hash = "mzg-0.0.2-dgyD148SAQDKM8-EbT8FJuxttK5fPgchgspQYomRHNce",
+            .url = "git+https://github.com/uyha/mzg.git?ref=v0.0.3#5ae217fe2bd1adda47dbfc147e1c86b17cf107f5",
+            .hash = "mzg-0.0.3-dgyD12ETAQD3jlON9FTGKQNCG0c0mdSkOLhO6nyOQJDJ",
         },
     },
     .paths = .{
