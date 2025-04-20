@@ -74,30 +74,56 @@ pub fn build(b: *std.Build) void {
 
     const options: ExecutableOptions = .{ .target = target, .optimize = optimize };
 
-    _ = addPlayground(b, "arena_usage", options);
-    _ = addPlayground(b, "distinct", options);
-    _ = addPlayground(b, "fanotify", options);
-    _ = addPlayground(b, "lambda", options);
-    _ = addPlayground(b, "packed", options);
-    _ = addPlayground(b, "plus", options);
-    _ = addPlayground(b, "sentinel", options);
-    _ = addPlayground(b, "slice", options);
-    _ = addPlayground(b, "struct", options);
-    _ = addPlayground(b, "swap", options);
-    _ = addPlayground(b, "tagged_union", options);
-    _ = addPlayground(b, "use_shared_var", options);
+    const scripts = .{
+        "arena_usage",
+        "distinct",
+        "fanotify",
+        "lambda",
+        "packed",
+        "plus",
+        "sentinel",
+        "slice",
+        "struct",
+        "swap",
+        "tagged_union",
+        "use_shared_var",
+        "vector",
+    };
+
+    inline for (scripts) |s| {
+        _ = addPlayground(b, s, options);
+    }
 
     const zeromq = addPlayground(b, "zeromq", options);
     const zimq = b.dependency("zimq", .{
         .target = target,
         .optimize = optimize,
     });
-    zeromq.root_module.addImport("zimq", zimq.module("zimq"));
-
-    const message_pack = addPlayground(b, "message_pack", options);
     const mzg = b.dependency("mzg", .{
         .target = target,
         .optimize = optimize,
     });
+
+    zeromq.root_module.addImport("zimq", zimq.module("zimq"));
+    zeromq.root_module.addImport("mzg", mzg.module("mzg"));
+
+    const publish = addPlayground(b, "publish", options);
+    publish.root_module.addImport("zimq", zimq.module("zimq"));
+
+    const subscribe = addPlayground(b, "subscribe", options);
+    subscribe.root_module.addImport("zimq", zimq.module("zimq"));
+
+    const message_pack = addPlayground(b, "message_pack", options);
     message_pack.root_module.addImport("mzg", mzg.module("mzg"));
+
+    const test_mod = b.addTest(.{
+        .name = "test",
+        .root_source_file = b.path("src/test.zig"),
+        .target = target,
+        .optimize = optimize,
+    });
+    test_mod.root_module.addImport("zimq", zimq.module("zimq"));
+    const run_tests = b.addRunArtifact(test_mod);
+    const test_step = b.step("test", "test");
+    test_step.dependOn(&run_tests.step);
 }
