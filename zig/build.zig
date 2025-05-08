@@ -82,6 +82,7 @@ pub fn build(b: *std.Build) void {
         "packed",
         "plus",
         "sentinel",
+        "sizeof",
         "slice",
         "struct",
         "swap",
