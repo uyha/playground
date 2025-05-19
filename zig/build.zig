@@ -78,7 +78,9 @@ pub fn build(b: *std.Build) void {
         "arena_usage",
         "distinct",
         "fanotify",
+        "function",
         "lambda",
+        "nullnull",
         "packed",
         "plus",
         "sentinel",
@@ -87,6 +89,8 @@ pub fn build(b: *std.Build) void {
         "struct",
         "swap",
         "tagged_union",
+        "typemap",
+        "union",
         "use_shared_var",
         "vector",
     };

@@ -1,8 +1,9 @@
 pub fn main() !void {
-    _ = Packed{ .child = .{ .value = 32 } };
+    const a: Packed = @bitCast(@as(u32, 1));
+    _ = &a;
 }
 
-const Child = packed struct {
+const Child = packed struct(u32) {
     value: i32,
 };
 const Packed = packed struct {
