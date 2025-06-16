@@ -12,7 +12,7 @@ pub fn main() !void {
 
     while (true) {
         _ = try socket.recvMsg(&message, .{});
-        std.debug.print("{s}\n", .{message.slice().?});
+        std.debug.print("{s}\n", .{message.slice()});
     }
 }
 

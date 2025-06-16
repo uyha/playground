@@ -75,6 +75,7 @@ pub fn build(b: *std.Build) void {
     const options: ExecutableOptions = .{ .target = target, .optimize = optimize };
 
     const scripts = .{
+        "2d",
         "arena_usage",
         "distinct",
         "fanotify",

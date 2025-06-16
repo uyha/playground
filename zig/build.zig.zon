@@ -37,8 +37,8 @@
     // internet connectivity.
     .dependencies = .{
         .zimq = .{
-            .url = "git+https://github.com/uyha/zimq.git#f82a9daeb92dc0b46257a7a187a6ac04d7cc0ab1",
-            .hash = "zimq-0.0.0-nw1ioNB1AQDqwOzxuUN1_0IKZNF0Mwe2CKFGax_zY4VG",
+            .url = "git+https://github.com/uyha/zmq.git#c8ba4645c7b980068fd55350b306e5c0de0557d5",
+            .hash = "zimq-0.0.0-nw1ioOOjAQBVn_MV41-w-MLqhewZQ7D3SZsgs_xAQqDv",
         },
         .mzg = .{
             .url = "git+https://github.com/uyha/mzg.git?ref=v0.0.3#5ae217fe2bd1adda47dbfc147e1c86b17cf107f5",
