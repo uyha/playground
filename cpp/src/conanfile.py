@@ -12,7 +12,7 @@ class SandboxRecipe(ConanFile):
         assert self.requires is not None
         self.requires("fmt/10.2.0")
         self.requires("msgpack-cxx/6.0.0", options={"use_boost": False})
-        self.requires("lely-core/2.3.2")
+        self.requires("lely-core/2.3.4")
         self.requires("re2/20231101")
         self.requires("flatbuffers/23.5.26")
         self.requires("pfr/2.2.0")
