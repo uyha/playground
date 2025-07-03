@@ -16,7 +16,7 @@
         "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
         "CMAKE_BUILD_TYPE": "Debug",
         "CPACK_GENERATOR": "DEB",
-        "CMAKE_CXX_COMPILER": "g++-11",
+        "CMAKE_CXX_COMPILER": "g++-13",
         "CMAKE_CXX_STANDARD": "20",
         "CONAN_PROFILE_HOST": "${sourceDir}/data/conan/x86_64.conf"
       },

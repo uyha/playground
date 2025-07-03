@@ -10,21 +10,20 @@
 
 template <>
 struct fmt::formatter<::timespec> {
-  constexpr auto parse(format_parse_context &context) -> decltype(context.begin()) {
+  constexpr auto parse(format_parse_context &context) -> format_parse_context::iterator {
     return context.begin();
   }
-  template <typename Context>
-  auto format(::timespec const &value, Context &context) -> decltype(context.out()) {
+  auto format(::timespec const &value, format_context &context) const -> format_context::iterator {
     return format_to(context.out(), "{{tv_sec = {}, tv_nsec = {}}}", value.tv_sec, value.tv_nsec);
   }
 };
 template <>
 struct fmt::formatter<struct ::stat> {
-  constexpr auto parse(format_parse_context &context) -> decltype(context.begin()) {
+  constexpr auto parse(format_parse_context &context) -> format_parse_context::iterator {
     return context.begin();
   }
-  template <typename Context>
-  auto format(struct ::stat const &value, Context &context) -> decltype(context.out()) {
+  auto format(struct ::stat const &value, format_context &context) const
+      -> format_context::iterator {
     return format_to(context.out(),
                      "{{st_dev = {}, st_ino = {}, st_mode = 0{:o}, st_nlink = {}, st_uid = {}, "
                      "st_gid = {}, st_rdev = {}, st_size = {}, st_blksize = {}, st_blocks = {}, "
@@ -56,16 +55,16 @@ int main() {
   auto const shm_name = "/sandbox.ftruncate.shm";
 
   auto epoll = ::epoll_create1(0);
-  struct ::stat epoll_stat {};
+  struct ::stat epoll_stat{};
 
   auto dup_epoll = ::dup(epoll);
-  struct ::stat dup_epoll_stat {};
+  struct ::stat dup_epoll_stat{};
 
   auto mq = ::mq_open(mq_name, O_RDONLY | O_CREAT, 0666, nullptr);
-  struct ::stat mq_stat {};
+  struct ::stat mq_stat{};
 
   auto shm = ::shm_open(shm_name, O_RDWR | O_CREAT, 0666);
-  struct ::stat shm_stat {};
+  struct ::stat shm_stat{};
 
   fmt::print("epoll+fstat: {} {}\n", epoll, ::fstat(epoll, &epoll_stat));
   fmt::print("dup_epoll+fstat: {} {}\n", epoll, ::fstat(dup_epoll, &dup_epoll_stat));

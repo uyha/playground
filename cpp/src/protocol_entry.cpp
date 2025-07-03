@@ -1,6 +1,5 @@
 #include <fmt/format.h>
 #include <fmt/ranges.h>
-#include <iterator>
 #include <netdb.h>
 #include <vector>
 
@@ -25,11 +24,10 @@ struct NullSentinel {
 
 template <>
 struct fmt::formatter<::protoent> {
-  constexpr auto parse(format_parse_context &context) -> decltype(context.begin()) {
+  constexpr auto parse(format_parse_context &context) -> format_parse_context::iterator {
     return context.begin();
   }
-  template <typename Context>
-  auto format(::protoent const &value, Context &context) -> decltype(context.out()) {
+  auto format(::protoent const &value, format_context &context) const -> format_context::iterator {
     auto aliases = std::vector<std::string>{};
     for (auto begin = value.p_aliases; *begin != nullptr; ++begin) {
       aliases.push_back(*begin);
@@ -46,7 +44,7 @@ int main() {
   ::setprotoent(true);
 
   while (true) {
-    auto proto = getprotoent();
+    auto *proto = getprotoent();
     if (not proto) {
       break;
     }

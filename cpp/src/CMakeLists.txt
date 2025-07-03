@@ -11,6 +11,7 @@ find_package(pfr REQUIRED)
 find_package(nlohmann_json REQUIRED)
 find_package(inja REQUIRED)
 find_package(cppzmq REQUIRED)
+find_package(SQLite3 REQUIRED)
 
 file(DOWNLOAD
   "https://raw.githubusercontent.com/uyha/fn/v0.5/src/river/fn.hpp"
@@ -155,3 +156,6 @@ target_sources(virtual PRIVATE virtual-dummy.cpp)
 
 add_snippet(inotify)
 add_snippet(fanotify)
+
+add_snippet(sqlite)
+target_link_libraries(sqlite PRIVATE SQLite::SQLite3)
