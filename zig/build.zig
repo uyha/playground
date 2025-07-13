@@ -76,6 +76,8 @@ pub fn build(b: *std.Build) void {
 
     const scripts = .{
         "2d",
+        "align",
+        "bitcast",
         "arena_usage",
         "distinct",
         "fanotify",
