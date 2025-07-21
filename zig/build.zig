@@ -82,6 +82,7 @@ pub fn build(b: *std.Build) void {
         "distinct",
         "fanotify",
         "function",
+        "ignore",
         "lambda",
         "nullnull",
         "packed",
