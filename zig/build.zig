@@ -94,6 +94,7 @@ pub fn build(b: *std.Build) void {
         "struct",
         "swap",
         "tagged_union",
+        "tuple",
         "typemap",
         "typevar",
         "union",
