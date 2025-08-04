@@ -92,6 +92,7 @@ pub fn build(b: *std.Build) void {
         "slice",
         "static",
         "struct",
+        "subset",
         "swap",
         "tagged_union",
         "tuple",
