@@ -142,4 +142,12 @@ pub fn build(b: *std.Build) void {
     const run_tests = b.addRunArtifact(test_mod);
     const test_step = b.step("test", "test");
     test_step.dependOn(&run_tests.step);
+
+    const copyRes = b.addSystemCommand(&.{"cp"});
+    copyRes.addFileArg(b.path("res/some.txt"));
+    const out = copyRes.addOutputFileArg("out/some.txt");
+
+    const resource = addPlayground(b, "resource", options);
+    resource.step.dependOn(&copyRes.step);
+    out.addStepDependencies(&resource.step);
 }
