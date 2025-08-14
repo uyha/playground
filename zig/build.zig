@@ -148,6 +148,5 @@ pub fn build(b: *std.Build) void {
     const out = copyRes.addOutputFileArg("out/some.txt");
 
     const resource = addPlayground(b, "resource", options);
-    resource.step.dependOn(&copyRes.step);
-    out.addStepDependencies(&resource.step);
+    resource.root_module.addAnonymousImport("some", .{ .root_source_file = out });
 }
