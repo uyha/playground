@@ -10,6 +10,6 @@ pub fn main() !void {
     var copy_arena = arena;
     defer copy_arena.deinit();
 
-    var list = std.ArrayList(u8).init(copy_arena.allocator());
-    try list.append(1);
+    var list: std.ArrayList(u8) = .empty;
+    try list.append(copy_arena.allocator(), 1);
 }

@@ -10,7 +10,7 @@ pub fn main() !void {
     try socket.set(.linger, 0);
 
     try socket.bind("ipc://greeting");
-    std.time.sleep(1 * std.time.ns_per_s);
+    std.Thread.sleep(1 * std.time.ns_per_s);
     defer socket.sendConstSlice("die", .{}) catch {};
 
     try socket.sendConstSlice("hello", .{});
