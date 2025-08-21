@@ -5,8 +5,8 @@
     .minimum_zig_version = "0.15.1",
     .dependencies = .{
         .zimq = .{
-            .url = "git+https://github.com/uyha/zmq.git#0304db5e34bc1bb5d8aec5b466c494267c6c3c7c",
-            .hash = "zimq-0.0.0-nw1ioCSkAQAvM8wfyo-StYGjnjxQ7gZWBSbLwDSQKowz",
+            .url = "git+https://github.com/uyha/zmq.git#1ca5079a202446ece4eae4e097cdd12a97b20577",
+            .hash = "zimq-0.0.0-nw1ioBKkAQCaEY1IYFUF-w_CTwtIf7SR55GDjaJozQhI",
         },
         .mzg = .{
             .url = "git+https://github.com/uyha/mzg.git#9a2fc057acc8945e4df033a8fa4c9f53c4e0abca",
