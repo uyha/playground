@@ -1,11 +1,14 @@
-pub fn main() void {
-    while (true) : ({
-        std.debug.print("{s}:{} ({s})\n", .{ @src().file, @src().line, @src().fn_name });
-        break;
-    }) {
-        defer std.debug.print("{s}:{} ({s})\n", .{ @src().file, @src().line, @src().fn_name });
-        std.debug.print("{s}:{} ({s})\n", .{ @src().file, @src().line, @src().fn_name });
-    }
+const S = struct {
+    const a: S = .{};
+};
+
+fn f(ptr: *const S) void {
+    std.debug.print("{*}\n", .{ptr});
+}
+pub fn main() !void {
+    f(&S.a);
+    f(&.a);
 }
 
 const std = @import("std");
+const Allocator = std.mem.Allocator;
