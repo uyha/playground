@@ -159,3 +159,5 @@ add_snippet(fanotify)
 
 add_snippet(sqlite)
 target_link_libraries(sqlite PRIVATE SQLite::SQLite3)
+
+add_snippet(can)

@@ -1,14 +1,16 @@
-const S = struct {
-    const a: S = .{};
+fn bad() []u8 {
+    var data: [8]u8 = @splat(1);
+    return &data;
+}
+
+const A = packed union {
+    a: u6,
+    b: f32,
 };
 
-fn f(ptr: *const S) void {
-    std.debug.print("{*}\n", .{ptr});
-}
 pub fn main() !void {
-    f(&S.a);
-    f(&.a);
+    const a: *const [0:0]u8 = "";
+    std.debug.print("{s}\n", .{@typeName(@TypeOf(a))});
 }
 
 const std = @import("std");
-const Allocator = std.mem.Allocator;
