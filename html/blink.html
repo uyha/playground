@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title></title>
+    <link href="css/style.css" rel="stylesheet" />
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        function off(element) {
+          element.style.backgroundColor = null;
+        }
+        function on(element) {
+          element.style.backgroundColor = "red";
+        }
+
+        const freq = 200;
+
+        const firstMap = [
+          [off, freq],
+          [off, freq],
+          [on, freq],
+          [off, freq],
+        ];
+        const secondMap = [
+          [off, freq],
+          [on, freq],
+          [off, freq],
+          [off, freq],
+        ];
+        const thirdMap = [
+          [on, freq],
+          [off, freq],
+          [off, freq],
+          [off, freq],
+        ];
+
+        function toggle(element, map) {
+          var index = 0;
+
+          const invoke = () => {
+            const [f, delay] = map[index];
+            index = (index + 1) % map.length;
+            setTimeout(() => {
+              f(element);
+              invoke();
+            }, delay);
+          };
+
+          return invoke;
+        }
+
+        const firstToggle = toggle(first, firstMap);
+        const secondToggle = toggle(second, secondMap);
+        const thirdToggle = toggle(third, thirdMap);
+
+        firstToggle();
+        secondToggle();
+        thirdToggle();
+      });
+    </script>
+  </head>
+  <body>
+    <div id="first" style="width: 50px; height: 50px; background: red"></div>
+    <div style="width: 50px; height: 50px"></div>
+    <div id="second" style="width: 50px; height: 50px; background: red"></div>
+    <div style="width: 50px; height: 50px"></div>
+    <div id="third" style="width: 50px; height: 50px; background: red"></div>
+  </body>
+</html>

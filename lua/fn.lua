@@ -4,8 +4,8 @@ local fn = function(...)
 	print(...)
 end
 
-fn {
-  a = 1,
-  ["a"] = 1
-}
-fn"asdasdsa"
+fn({
+	a = 1,
+	["a"] = 1,
+})
+fn("asdasdsa")
