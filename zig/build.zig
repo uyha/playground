@@ -117,4 +117,7 @@ pub fn build(b: *std.Build) void {
 
     const resource = addPlayground(b, "resource", options);
     resource.root_module.addAnonymousImport("some", .{ .root_source_file = out });
+
+    const clock = addPlayground(b, "clock", options);
+    clock.root_module.link_libc = true;
 }
