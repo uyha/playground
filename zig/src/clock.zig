@@ -22,6 +22,11 @@ const Resolution = struct {
     }
 };
 pub fn main() !void {
+    var buffer: [1024]u8 = undefined;
+    var file: std.fs.File = .stdout();
+    var stdout: std.fs.File.Writer = file.writer(&buffer);
+    const writer: *std.Io.Writer = &stdout.interface;
+
     for (std.enums.values(std.c.clockid_t)) |clock| {
         var res: std.c.timespec = undefined;
         var time: std.c.timespec = undefined;
@@ -34,6 +39,8 @@ pub fn main() !void {
             .{ @tagName(clock), Resolution.init(res), time },
         );
     }
+
+    try writer.flush();
 }
 
 const std = @import("std");
