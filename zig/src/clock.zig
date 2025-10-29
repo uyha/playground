@@ -34,7 +34,7 @@ pub fn main() !void {
         _ = std.c.clock_getres(clock, &res);
         _ = std.c.clock_gettime(clock, &time);
 
-        std.debug.print(
+        try writer.print(
             ".{{ .name = {s}, .res = {f}, .time = {} }}\n",
             .{ @tagName(clock), Resolution.init(res), time },
         );
