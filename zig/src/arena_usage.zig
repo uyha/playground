@@ -3,7 +3,7 @@ const assert = std.debug.assert;
 
 pub fn main() !void {
     var gpa = std.heap.GeneralPurposeAllocator(.{}){};
-    defer assert(!gpa.detectLeaks());
+    defer assert(gpa.deinit() == .ok);
 
     const arena = std.heap.ArenaAllocator.init(gpa.allocator());
 

@@ -10,15 +10,15 @@ fn addPlayground(
     name: []const u8,
     options: Options,
 ) *std.Build.Step.Compile {
-    var buffer: std.ArrayList(u8) = .empty;
-    defer buffer.deinit(b.allocator);
+    var buffer: std.Io.Writer.Allocating = .init(b.allocator);
+    defer buffer.deinit();
 
-    std.fmt.format(buffer.writer(b.allocator), "src/{s}.zig", .{name}) catch unreachable;
+    buffer.writer.print("src/{s}.zig", .{name}) catch unreachable;
 
     const exe = b.addExecutable(.{
         .name = name,
         .root_module = b.createModule(.{
-            .root_source_file = b.path(buffer.items),
+            .root_source_file = b.path(buffer.writer.buffered()),
             .target = options.target,
             .optimize = options.optimize,
         }),
