@@ -161,3 +161,5 @@ add_snippet(sqlite)
 target_link_libraries(sqlite PRIVATE SQLite::SQLite3)
 
 add_snippet(can)
+
+add_snippet(main)
