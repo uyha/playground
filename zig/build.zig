@@ -50,6 +50,7 @@ pub fn build(b: *std.Build) void {
         "fanotify",
         "function",
         "ignore",
+        "io",
         "lambda",
         "main",
         "nullnull",

@@ -4,7 +4,7 @@ const ComptimeField = struct {
 pub fn main() !void {
     var a: ComptimeField = .{};
     _ = &a;
-    std.debug.print("{}\n", .{a});
+    std.debug.print("{} {}\n", .{ @sizeOf([*]u8), @sizeOf(usize) });
 }
 
 const std = @import("std");

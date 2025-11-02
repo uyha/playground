@@ -1,4 +1,7 @@
 pub fn main() !void {
+    var thread: std.Io.Threaded = .init_single_threaded;
+    const io: std.Io = thread.io();
+
     var context: *zimq.Context = try .init();
     defer context.deinit();
 
@@ -10,7 +13,7 @@ pub fn main() !void {
     try socket.set(.linger, 0);
 
     try socket.bind("ipc://greeting");
-    std.Thread.sleep(1 * std.time.ns_per_s);
+    try io.sleep(.fromSeconds(1), .awake);
     defer socket.sendConstSlice("die", .{}) catch {};
 
     try socket.sendConstSlice("hello", .{});
@@ -21,3 +24,4 @@ pub fn main() !void {
 
 const zimq = @import("zimq");
 const std = @import("std");
+const Io = std.Io;
