@@ -39,7 +39,7 @@ void string_compare() {
   fmt::print("{}\n", end - start);
 }
 
-int main([[maybe_unused]] int argc, [[maybe_unused]] char **argv) {
+int main(int argc, [[maybe_unused]] char **argv) {
   if (argc > 1) {
     if (argv[1] == "shm"sv) {
       shm();

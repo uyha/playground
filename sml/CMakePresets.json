@@ -18,7 +18,7 @@
         "CONAN_PROFILE_HOST": "${sourceDir}/data/conan/x86_64.conf",
         "CONAN_AUTODETECT": "ON",
         "CMAKE_CXX_STANDARD": "20",
-        "CMAKE_CXX_COMPILER": "g++-10"
+        "CMAKE_CXX_COMPILER": "g++-13"
       },
       "environment": {}
     },

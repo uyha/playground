@@ -8,6 +8,7 @@ pub fn main() !void {
     try context.set(.blocky, false);
 
     var socket: *zimq.Socket = try .init(context, .@"pub");
+    try socket.set(.gssapi_server, true);
     defer socket.deinit();
 
     try socket.set(.linger, 0);
