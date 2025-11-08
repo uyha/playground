@@ -1,0 +1,17 @@
+general {
+  states {
+    showing_operation,
+    showing_menu { on_entry: show_menu },
+    shutting_down { on_entry: show_shutdown },
+  },
+  events { display_sync, display_command }
+  actions {
+    sync_from_state(location: Location, state: *const DisplayState),
+  },
+  guards {
+    is_menu(display_info: *const DisplayInfo),
+  },
+
+  transitions {
+  },
+}
