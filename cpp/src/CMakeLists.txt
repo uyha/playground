@@ -16,7 +16,8 @@ find_package(SQLite3 REQUIRED)
 file(DOWNLOAD
   "https://raw.githubusercontent.com/uyha/fn/v0.5/src/river/fn.hpp"
   "${CMAKE_CURRENT_BINARY_DIR}/external/river/fn.hpp"
-  EXPECTED_HASH SHA256=a0f7f00670c08539191cf39bdf6f45894fd9b242fe3c9a337cf48267f403e881
+  EXPECTED_HASH
+    SHA256=a0f7f00670c08539191cf39bdf6f45894fd9b242fe3c9a337cf48267f403e881
 )
 
 function(add_snippet name)
@@ -24,7 +25,8 @@ function(add_snippet name)
   target_link_libraries(${name} PRIVATE fmt::fmt)
   target_compile_features(${name} PRIVATE cxx_std_20)
   target_compile_options(${name} PRIVATE ${warnings} ${wae})
-  target_include_directories(${name} PRIVATE "${CMAKE_CURRENT_BINARY_DIR}/external")
+  target_include_directories(${name}
+    PRIVATE "${CMAKE_CURRENT_BINARY_DIR}/external")
 endfunction()
 
 add_snippet(conditional_variable)
@@ -46,7 +48,8 @@ add_snippet(pthread_rwlock)
 target_link_libraries(pthread_rwlock PRIVATE Threads::Threads)
 
 add_snippet(sanitizer)
-target_compile_options(sanitizer PRIVATE -fsanitize=address,undefined,enum,shift)
+target_compile_options(sanitizer
+  PRIVATE -fsanitize=address,undefined,enum,shift)
 target_link_options(sanitizer PRIVATE -fsanitize=address,undefined,enum,shift)
 
 add_snippet(message_queue)
@@ -163,3 +166,4 @@ target_link_libraries(sqlite PRIVATE SQLite::SQLite3)
 add_snippet(can)
 
 add_snippet(main)
+add_snippet(string-literals)

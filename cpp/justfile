@@ -3,3 +3,6 @@ build *ARGS:
 
 config *ARGS:
   cmake --preset default "$@"
+
+run target: (build target)
+  ./build/src/{{target}}
