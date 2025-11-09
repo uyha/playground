@@ -1,23 +1,9 @@
-const ComptimeField = struct {
-    comptime value: u8 = 1,
+const A = struct {
+    field: []const []const u8,
 };
-
-fn slice(_: []const i32) void {}
-
-fn throw(err: type, e: ?err) err!void {
-    return e orelse {};
-}
-
 pub fn main() !void {
-    ({
-        errdefer |e| {
-            std.debug.print("{s}:{} ({s}) {}\n", .{ @src().file, @src().line, @src().fn_name, e });
-        }
-
-        return error.WTF;
-    }) catch |e| {
-        std.debug.print("{}\n", .{e});
-    };
+    const a: [3][]const u8 = @import("res").field;
+    std.debug.print("{any}\n", .{a});
 }
 
 const std = @import("std");

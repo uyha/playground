@@ -47,17 +47,18 @@ pub fn build(b: *std.Build) void {
         "bitcast",
         "distinct",
         "enum_map",
+        "errdefer",
         "fanotify",
         "function",
         "ignore",
         "io",
         "lambda",
-        "main",
         "nullnull",
         "order_of_eval",
         "packed",
         "plus",
         "sentinel",
+        "signal",
         "sizeof",
         "slice",
         "static",
@@ -121,4 +122,10 @@ pub fn build(b: *std.Build) void {
 
     const clock = addPlayground(b, "clock", options);
     clock.root_module.link_libc = true;
+
+    const main = addPlayground(b, "main", options);
+    main.root_module.addAnonymousImport(
+        "res",
+        .{ .root_source_file = b.path("src/res.zon") },
+    );
 }
