@@ -49,6 +49,7 @@ pub fn build(b: *std.Build) void {
         "enum_map",
         "errdefer",
         "fanotify",
+        "for-break",
         "function",
         "ignore",
         "io",
