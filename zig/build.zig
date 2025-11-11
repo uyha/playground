@@ -55,6 +55,7 @@ pub fn build(b: *std.Build) void {
         "io",
         "lambda",
         "nullnull",
+        "max",
         "order_of_eval",
         "packed",
         "plus",
