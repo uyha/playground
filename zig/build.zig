@@ -75,6 +75,7 @@ pub fn build(b: *std.Build) void {
         "union",
         "use_shared_var",
         "vector",
+        "writer",
     };
 
     inline for (scripts) |s| {
