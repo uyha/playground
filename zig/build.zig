@@ -59,6 +59,7 @@ pub fn build(b: *std.Build) void {
         "order_of_eval",
         "packed",
         "plus",
+        "random",
         "remove",
         "sentinel",
         "signal",
