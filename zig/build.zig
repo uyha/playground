@@ -50,6 +50,7 @@ pub fn build(b: *std.Build) void {
         "errdefer",
         "fanotify",
         "for-break",
+        "format",
         "function",
         "ignore",
         "io",
