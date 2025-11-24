@@ -1,7 +1,10 @@
 fn juicyMain(gpa: Allocator, io: Io) !void {
     _ = &gpa;
-    const now = try Clock.real.now(io);
-    std.debug.print("{}\n", .{now});
+    _ = &io;
+
+    std.debug.print("{}\n", .{&false});
+    std.debug.print("{}\n", .{&true});
+    std.debug.print("{}\n", .{&@as(u8, 1)});
 }
 
 pub fn main() !void {
@@ -9,7 +12,7 @@ pub fn main() !void {
     defer _ = allocator.deinit();
     const gpa = allocator.allocator();
 
-    var runtime: std.Io.Threaded = .init(gpa);
+    var runtime: std.Io.Threaded = .init_single_threaded;
     defer runtime.deinit();
 
     try juicyMain(gpa, runtime.io());

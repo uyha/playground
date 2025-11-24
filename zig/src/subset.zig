@@ -1,30 +1,32 @@
 pub fn Subset(comptime Root: type, comptime elements: anytype) type {
-    var fields: [elements.len]std.builtin.Type.EnumField = undefined;
+    const root = @typeInfo(Root).@"enum";
 
-    blk: inline for (elements, 0..) |element, i| {
+    var names: [elements.len][]const u8 = undefined;
+    var values: [elements.len]root.tag_type = undefined;
+
+    var fields: usize = 0;
+    blk: inline for (elements) |element| {
         if (@typeInfo(@TypeOf(element)) != .enum_literal) {
             @compileError("Enum literal expected");
         }
 
         inline for (std.meta.tags(Root)) |tag| {
             if (std.mem.eql(u8, @tagName(tag), @tagName(element))) {
-                fields[i] = .{
-                    .name = @tagName(tag),
-                    .value = @intFromEnum(tag),
-                };
+                names[fields] = @tagName(tag);
+                values[fields] = @intFromEnum(tag);
+                fields += 1;
                 continue :blk;
             }
         }
         unreachable;
     }
 
-    const root = @typeInfo(Root).@"enum";
-    return @Type(std.builtin.Type{ .@"enum" = .{
-        .tag_type = root.tag_type,
-        .fields = &fields,
-        .decls = &.{},
-        .is_exhaustive = root.is_exhaustive,
-    } });
+    return @Enum(
+        root.tag_type,
+        .exhaustive,
+        names[0..fields],
+        values[0..fields],
+    );
 }
 pub fn main() !void {
     const E = enum { a, b, c };

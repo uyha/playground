@@ -1,4 +1,3 @@
-const std = @import("std");
 const A = blk: {
     const First = @typeInfo(
         struct { a: u8 },
@@ -8,20 +7,15 @@ const A = blk: {
         struct { b: u8 },
     ).@"struct";
 
-    _ = &First;
-    _ = &Second;
+    const names, const types, const attrs = fieldtup(First.fields ++ Second.fields);
 
-    break :blk @Type(std.builtin.Type{
-        .@"struct" = .{
-            .layout = .auto,
-            .fields = First.fields ++ Second.fields,
-            .decls = First.decls ++ Second.decls,
-            .is_tuple = false,
-        },
-    });
+    break :blk @Struct(.auto, null, &names, &types, &attrs);
 };
 pub fn main() void {
     const a: A = .{ .a = 1, .b = 1 };
     _ = &a;
     std.debug.print("{any}\n", .{a});
 }
+
+const std = @import("std");
+const fieldtup = @import("utils.zig").fieldtup;

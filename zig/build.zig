@@ -15,14 +15,12 @@ fn addPlayground(
 
     buffer.writer.print("src/{s}.zig", .{name}) catch unreachable;
 
-    const exe = b.addExecutable(.{
-        .name = name,
-        .root_module = b.createModule(.{
-            .root_source_file = b.path(buffer.writer.buffered()),
-            .target = options.target,
-            .optimize = options.optimize,
-        }),
+    const mod = b.createModule(.{
+        .root_source_file = b.path(buffer.writer.buffered()),
+        .target = options.target,
+        .optimize = options.optimize,
     });
+    const exe = b.addExecutable(.{ .name = name, .root_module = mod });
     b.installArtifact(exe);
 
     const run_cmd = b.addRunArtifact(exe);
