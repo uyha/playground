@@ -50,6 +50,7 @@ pub fn build(b: *std.Build) void {
         "for-break",
         "format",
         "function",
+        "higheropaque",
         "ignore",
         "io",
         "lambda",
