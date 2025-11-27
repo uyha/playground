@@ -1,12 +1,11 @@
 .{
-    .name = "zig-build",
-
+    .name = .zig_build,
+    .fingerprint = 0x846b2bfa35bd5b69,
     .version = "0.0.0",
 
     .dependencies = .{
-        .zmq = .{
-            .url = "/home/uy/Personal/zmq",
-            .hash = "1220b9ac12dbc6bde6a9075c170422b422463dd5e3a589b06d66e246f9f02d6549d7",
+        .zimq = .{
+            .path = "./zimq",
         },
     },
     .paths = .{

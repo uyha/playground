@@ -4,19 +4,21 @@ pub fn build(b: *std.Build) !void {
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{});
 
-    const zmq = b.dependency(
-        "zmq",
+    const zimq = b.dependency(
+        "zimq",
         .{ .target = target, .optimize = optimize },
     );
-    const zmq_module = zmq.module("libzmq");
 
-    const exe = b.addExecutable(.{
-        .name = "some",
+    const mod = b.createModule(.{
         .root_source_file = b.path("here.zig"),
         .target = target,
         .optimize = optimize,
     });
-    exe.root_module.addImport("zmq", zmq_module);
+    const exe = b.addExecutable(.{
+        .name = "some",
+        .root_module = mod,
+    });
+    exe.root_module.addImport("zimq", zimq.module("zimq"));
     b.installArtifact(exe);
 
     const run_exe = b.addRunArtifact(exe);
