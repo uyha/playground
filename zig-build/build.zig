@@ -27,7 +27,7 @@ pub fn build(b: *std.Build) !void {
     const run_step = b.step("run", "");
     run_step.dependOn(&run_exe.step);
 
-    const pp = b.addSystemCommand(&.{ "zig", "cc", "-xc", "-P", "-E" });
+    const pp = b.addSystemCommand(&.{ b.graph.zig_exe, "cc", "-xc", "-P", "-E" });
     pp.addFileArg(b.path("pre.zig"));
     pp.addArg("-o");
     const out = pp.addOutputFileArg("out.zig");
