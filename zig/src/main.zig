@@ -1,10 +1,6 @@
 fn juicyMain(gpa: Allocator, io: Io) !void {
     _ = &gpa;
     _ = &io;
-
-    std.debug.print("{}\n", .{&false});
-    std.debug.print("{}\n", .{&true});
-    std.debug.print("{}\n", .{&@as(u8, 1)});
 }
 
 pub fn main() !void {
@@ -16,6 +12,8 @@ pub fn main() !void {
     defer runtime.deinit();
 
     try juicyMain(gpa, runtime.io());
+
+    std.debug.print("{}\n", .{@sizeOf(packed struct { u4, u4 })});
 }
 
 const std = @import("std");
