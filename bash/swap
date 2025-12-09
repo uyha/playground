@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+swap() {
+  declare -n first=$1
+  declare -n second=$2
+  local temp=$first
+  first="$second"
+  second="$temp"
+}
+
+seq=(1 2 3)
+swap seq[0] seq[2]
+
+echo "${seq[@]}"
