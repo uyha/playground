@@ -21,10 +21,13 @@ const Resolution = struct {
         }
     }
 };
-pub fn main() !void {
+
+fn juicyMain(gpa: Allocator, io: Io) !void {
+    _ = &gpa;
+
     var buffer: [1024]u8 = undefined;
-    var file: std.fs.File = .stdout();
-    var stdout: std.fs.File.Writer = file.writer(&buffer);
+    var file: std.Io.File = .stdout();
+    var stdout: std.Io.File.Writer = file.writer(io, &buffer);
     const writer: *std.Io.Writer = &stdout.interface;
 
     for (std.enums.values(std.c.clockid_t)) |clock| {
@@ -42,5 +45,18 @@ pub fn main() !void {
 
     try writer.flush();
 }
+pub fn main() !void {
+    var allocator: std.heap.DebugAllocator(.{}) = .init;
+    defer _ = allocator.deinit();
+    const gpa = allocator.allocator();
+
+    var runtime: std.Io.Threaded = .init(gpa, .{});
+    defer runtime.deinit();
+
+    try juicyMain(gpa, runtime.io());
+}
 
 const std = @import("std");
+const Allocator = std.mem.Allocator;
+const Io = std.Io;
+const Clock = Io.Clock;

@@ -15,7 +15,7 @@ pub fn main() !void {
     defer _ = allocator.deinit();
     const gpa = allocator.allocator();
 
-    var runtime: std.Io.Threaded = .init(gpa);
+    var runtime: std.Io.Threaded = .init_single_threaded;
     defer runtime.deinit();
 
     try juicyMain(gpa, runtime.io());

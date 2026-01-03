@@ -12,8 +12,6 @@ pub fn main() !void {
     defer runtime.deinit();
 
     try juicyMain(gpa, runtime.io());
-
-    std.debug.print("{}\n", .{@sizeOf(packed struct { u4, u4 })});
 }
 
 const std = @import("std");
