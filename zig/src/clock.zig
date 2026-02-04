@@ -60,6 +60,16 @@ const FromEpoch = struct {
             try writer.print(" {}ms", .{milliseconds});
             remain -= milliseconds * millisecond;
         }
+        if (remain > microsecond) {
+            const microseconds = @divFloor(remain, microsecond);
+            try writer.print(" {}us", .{microseconds});
+            remain -= microseconds * microsecond;
+        }
+        if (remain > 0) {
+            const nanoseconds = @divFloor(remain, nanosecond);
+            try writer.print(" {}ns", .{nanoseconds});
+            remain -= nanoseconds * nanosecond;
+        }
     }
 };
 
@@ -80,12 +90,18 @@ pub fn main(init: Init) !void {
         _ = std.c.clock_getres(clock, &res);
         _ = std.c.clock_gettime(clock, &time);
 
+        const timestamp: Io.Timestamp = .fromNanoseconds(
+            @as(i96, time.sec) * 1_000_000_000 + @as(i96, time.nsec),
+        );
+
         try writer.print(
-            ".{{ .name = {s}, .res = {f}, .time = {f} }}\n",
+            ".{{ .name = {s}, .res = {f}, .sec = {}, .nsec = {}, {f} }}\n",
             .{
                 @tagName(clock),
                 Resolution.init(res),
-                fromEpoch(Timestamp.fromNanoseconds(time.sec * 1_000_000_000 + time.nsec)),
+                time.sec,
+                time.nsec,
+                fromEpoch(timestamp),
             },
         );
     }
