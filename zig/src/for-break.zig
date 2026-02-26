@@ -7,7 +7,7 @@ pub fn main() !void {
     var threaded: std.Io.Threaded = .init_single_threaded;
     const io: std.Io = threaded.io();
 
-    const now = try clock.real.now(io);
+    const now = clock.real.now(io);
     const seed: u64 = @intCast(now.nanoseconds & ((1 << 64) - 1));
     var engine: std.Random.DefaultPrng = .init(seed);
     const random: std.Random = engine.random();

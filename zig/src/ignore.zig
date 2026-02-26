@@ -8,7 +8,7 @@ fn random() error{ WTF, Unexpected, UnsupportedClock }!u8 {
     const io: Io = this_thread.io();
 
     if (static.rand == null) {
-        const now = try Clock.real.now(io);
+        const now = Clock.real.now(io);
         static.engine = std.Random.DefaultPrng.init(@bitCast(now.toSeconds()));
         static.rand = static.engine.?.random();
     }
