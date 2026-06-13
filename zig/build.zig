@@ -57,6 +57,7 @@ pub fn build(b: *std.Build) void {
             "nullnull",
             "order_of_eval",
             "packed",
+            "passwd",
             "plus",
             "random",
             "remove",
