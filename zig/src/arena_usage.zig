@@ -2,7 +2,7 @@ const std = @import("std");
 const assert = std.debug.assert;
 
 pub fn main() !void {
-    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+    var gpa: std.heap.DebugAllocator(.{}) = .init;
     defer assert(gpa.deinit() == .ok);
 
     const arena = std.heap.ArenaAllocator.init(gpa.allocator());

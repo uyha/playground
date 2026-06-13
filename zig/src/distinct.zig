@@ -9,7 +9,7 @@ const B = packed struct {
 };
 
 const C = blk: {
-    var info = @typeInfo(A);
+    const info = @typeInfo(A);
     const fields = info.@"struct".fields;
     const names, const types, const attrs = fieldtup(fields);
 
