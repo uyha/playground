@@ -27,7 +27,10 @@ const PsswdParser = struct {
         self.content.deinit(gpa);
     }
 
-    pub fn next(self: *PsswdParser, gpa: Allocator) error{ ReadFailed, OutOfMemory }!?Entry {
+    pub fn next(
+        self: *PsswdParser,
+        gpa: Allocator,
+    ) error{ ReadFailed, OutOfMemory, Malformed }!?Entry {
         self.content.clearRetainingCapacity();
 
         const fields = @typeInfo(Entry).@"struct".fields;
@@ -38,6 +41,7 @@ const PsswdParser = struct {
         while (self.reader.takeByte()) |c| {
             if (c == '\n') {
                 ranges[count] = .{ .start = start, .end = self.content.items.len };
+                count += 1;
                 break;
             }
 
@@ -52,12 +56,16 @@ const PsswdParser = struct {
             switch (e) {
                 error.EndOfStream => {
                     if (self.content.items.len == 0) return null;
+                    ranges[count] = .{ .start = start, .end = self.content.items.len - 1 };
+                    count += 1;
                 },
                 else => |v| return v,
             }
         }
 
-        std.debug.assert(count == fields.len - 1);
+        if (count != fields.len) {
+            return error.Malformed;
+        }
 
         return .{
             .name = self.content.items[ranges[0].start..ranges[0].end],
@@ -72,21 +80,24 @@ const PsswdParser = struct {
 };
 
 pub fn main(init: Init) !void {
-    const f = try Io.Dir.openFileAbsolute(init.io, "/etc/passwd", .{});
+    // const f = try Io.Dir.openFileAbsolute(init.io, "/etc/passwd", .{});
+    //
+    // var buffer: [2048]u8 = undefined;
+    // var streaming_reader = f.readerStreaming(init.io, &buffer);
+    // const reader: *Io.Reader = &streaming_reader.interface;
 
-    var buffer: [2048]u8 = undefined;
-    var streaming_reader = f.readerStreaming(init.io, &buffer);
-    const reader: *Io.Reader = &streaming_reader.interface;
-
-    var parser: PsswdParser = .init(reader);
+    var reader: Io.Reader = Io.Reader.fixed(
+        \\uy:x:100:100::test:asdf
+    );
+    var parser: PsswdParser = .init(&reader);
     defer parser.deinit(init.gpa);
 
-    const uid = std.os.linux.getuid();
-
+    // const uid = std.os.linux.getuid();
+    //
     while (try parser.next(init.gpa)) |entry| {
-        if (uid != try std.fmt.parseInt(std.os.linux.uid_t, entry.uid, 10)) {
-            continue;
-        }
+        // if (uid != try std.fmt.parseInt(std.os.linux.uid_t, entry.uid, 10)) {
+        //     continue;
+        // }
         std.debug.print("{f}\n", .{entry});
     }
 }
