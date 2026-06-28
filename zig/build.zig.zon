@@ -2,15 +2,15 @@
     .name = .zig,
     .version = "0.0.0",
     .fingerprint = 0xc1ce1081322e7e09, // Changing this has security and trust implications.
-    .minimum_zig_version = "0.15.1",
+    .minimum_zig_version = "0.16.0",
     .dependencies = .{
         .zimq = .{
-            .url = "git+https://github.com/uyha/zimq.git?ref=zig-0.15.2#26ed1b1123377d911610db4c43c79ce1d5228f26",
-            .hash = "zimq-0.0.0-nw1ioGioAQCf8tyBYFGi7KgrdZBBB06NGNqw2fbzxm87",
+            .url = "git+https://github.com/uyha/zimq.git#4fdd03081d404051d1ed0295e5e5f4e6041ac187",
+            .hash = "zimq-0.0.0-nw1ioPexAQAIp17p9BihBZtLEIYkroz0ziwElrnDzJG0",
         },
         .mzg = .{
-            .url = "git+https://github.com/uyha/mzg.git#9a2fc057acc8945e4df033a8fa4c9f53c4e0abca",
-            .hash = "mzg-0.2.0-dgyD18lRAQAQwvNCrpfutTccUupHTSQ4E80n4gjy4nLr",
+            .url = "git+https://github.com/uyha/mzg.git#591530934666c568b6e08e48d9e08d690d8fb3a2",
+            .hash = "mzg-0.2.1-dgyD1yVRAQBb0l559Z_DEfJ4ef_J3s5QWM26yOeTCwV1",
         },
     },
     .paths = .{

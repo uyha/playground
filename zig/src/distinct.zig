@@ -9,11 +9,15 @@ const B = packed struct {
 };
 
 const C = blk: {
-    const info = @typeInfo(A);
-    const fields = info.@"struct".fields;
-    const names, const types, const attrs = fieldtup(fields);
+    const info = @typeInfo(A).@"struct";
 
-    break :blk @Struct(.auto, null, &names, &types, &attrs);
+    break :blk @Struct(
+        .auto,
+        null,
+        info.field_names,
+        info.field_types[0..],
+        info.field_attrs[0..],
+    );
 };
 
 pub fn main() void {
@@ -21,4 +25,3 @@ pub fn main() void {
 }
 
 const std = @import("std");
-const fieldtup = @import("utils.zig").fieldtup;

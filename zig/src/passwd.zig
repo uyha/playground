@@ -33,8 +33,8 @@ const PsswdParser = struct {
     ) error{ ReadFailed, OutOfMemory, Malformed }!?Entry {
         self.content.clearRetainingCapacity();
 
-        const fields = @typeInfo(Entry).@"struct".fields;
-        var ranges: [fields.len]struct { start: usize, end: usize } = undefined;
+        const names = @typeInfo(Entry).@"struct".field_names;
+        var ranges: [names.len]struct { start: usize, end: usize } = undefined;
         var count: u8 = 0;
         var start: usize = 0;
 
@@ -63,7 +63,7 @@ const PsswdParser = struct {
             }
         }
 
-        if (count != fields.len) {
+        if (count != names.len) {
             return error.Malformed;
         }
 
