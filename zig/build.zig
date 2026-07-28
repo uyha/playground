@@ -132,6 +132,23 @@ pub fn build(b: *std.Build) void {
         "res",
         .{ .root_source_file = b.path("src/res.zon") },
     );
+
+    const c = b.addExecutable(.{
+        .name = "c",
+        .root_module = b.createModule(.{
+            .target = target,
+            .optimize = optimize,
+            .link_libc = true,
+        }),
+    });
+    c.root_module.addCSourceFiles(.{
+        .files = &.{
+            "src/c.c",
+        },
+    });
+
+    const runC = b.step("c", "Run C");
+    runC.dependOn(&b.addRunArtifact(c).step);
 }
 
 const std = @import("std");
