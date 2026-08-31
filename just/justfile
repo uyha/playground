@@ -1,0 +1,5 @@
+export ROOTDIR := justfile_directory()
+set dotenv-load := true
+
+env:
+  echo "$CREDS"
