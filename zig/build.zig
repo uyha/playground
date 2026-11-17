@@ -149,6 +149,25 @@ pub fn build(b: *std.Build) void {
 
     const runC = b.step("c", "Run C");
     runC.dependOn(&b.addRunArtifact(c).step);
+
+    const circle_a = b.addExecutable(.{
+        .name = "circle",
+        .root_module = b.createModule(.{
+            .root_source_file = b.path("src/circle/a.zig"),
+            .target = target,
+            .optimize = optimize,
+        }),
+    });
+    const runCircleA = b.step("circle", "Run circular module import");
+    runCircleA.dependOn(&b.addRunArtifact(circle_a).step);
+
+    const circle_b = b.createModule(.{
+        .root_source_file = b.path("src/circle/b.zig"),
+        .target = target,
+        .optimize = optimize,
+    });
+    circle_b.addImport("A", circle_a.root_module);
+    circle_a.root_module.addImport("B", circle_b);
 }
 
 const std = @import("std");

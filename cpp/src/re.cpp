@@ -93,4 +93,11 @@ int main() {
     fmt::print("{}\n", re2::RE2::FullMatch(R"(+CREG: 0,1,"1A2B","03")", pattern, &lac, &cell_id));
     fmt::print("{} {}\n", lac, cell_id);
   }
+
+  {
+    auto degree  = int8_t{};
+    auto pattern = re2::RE2{R"((\d\d))"};
+    fmt::print("{}\n", re2::RE2::FullMatch(R"(29)", pattern, &degree));
+    fmt::print("{} {}\n", degree, degree);
+  }
 }
